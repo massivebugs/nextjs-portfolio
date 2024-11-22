@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { ASCII_ANIMATION_FRAMES } from "./ascii_animation_frames";
 import AsciiAnimation from "./components/atoms/AsciiAnimation";
 import JobExperience, { Experience } from "./components/atoms/JobExperience";
@@ -7,7 +7,7 @@ import TechnicalSkill, { Skill } from "./components/atoms/TechnicalSkill";
 import SocialLinkList from "./components/molecules/SocialLinkList";
 import ThemeChanger from "./components/molecules/ThemeChanger";
 import HomeSection from "./components/organisms/HomeSection";
-import { motion } from "motion/react";
+import ProjectCard, { Project } from "./components/atoms/ProjectCard";
 
 export default function Home() {
   const [playAsciiAnimation] = useState<boolean>(true);
@@ -71,6 +71,37 @@ export default function Home() {
         "strong work ethic",
         "flexibility and adaptability",
       ],
+    },
+  ];
+
+  const projects: Project[] = [
+    {
+      name: "lean-body.jp",
+      organization: "LEAN BODY Inc.",
+      description:
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel quia odit dicta veniam commodi qui quibusdam, placeat temporibus fuga incidunt quaerat rem facilis hic, mollitia earum ex facere veritatis error!",
+      techStack: "",
+    },
+    {
+      name: "teradoga.jp",
+      organization: "TERADOGA Co., Ltd",
+      description:
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel quia odit dicta veniam commodi qui quibusdam, placeat temporibus fuga incidunt quaerat rem facilis hic, mollitia earum ex facere veritatis error!",
+      techStack: "",
+    },
+    {
+      name: "Portfolio",
+      organization: "Personal Project",
+      description:
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel quia odit dicta veniam commodi qui quibusdam, placeat temporibus fuga incidunt quaerat rem facilis hic, mollitia earum ex facere veritatis error!",
+      techStack: "",
+    },
+    {
+      name: "TELEBYTE",
+      organization: "Personal Project",
+      description:
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel quia odit dicta veniam commodi qui quibusdam, placeat temporibus fuga incidunt quaerat rem facilis hic, mollitia earum ex facere veritatis error!",
+      techStack: "",
     },
   ];
 
@@ -153,17 +184,10 @@ export default function Home() {
         titleClassName="px-8 md:px-[15%] xl:px-[30%]"
         sandman={true}
       >
-        <div className="sticky top-0 flex h-full items-center overflow-hidden">
-          <div className="flex gap-4">
-            {[1, 2, 3, 4, 5].map((v) => (
-              <div
-                className="group relative h-[450px] w-[450px] overflow-hidden bg-neutral-200"
-                key={v}
-              >
-                <h3>#{v} Something comes here</h3>
-              </div>
-            ))}
-          </div>
+        <div className="flex flex-col">
+          {projects.map((v) => (
+            <ProjectCard project={v} key={v.name} />
+          ))}
         </div>
       </HomeSection>
       <HomeSection
