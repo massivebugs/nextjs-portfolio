@@ -1,12 +1,14 @@
+import { SANDMAN_TEXT_CLASS } from "@/app/lib/sandman";
 import Image from "next/image";
 
 export default function SocialLink(props: {
+  name: string;
   href: string;
   iconSrc: string;
   iconSrcForDarkMode: string;
   alt?: string;
   className?: string;
-  children?: React.ReactNode;
+  sandman?: boolean;
 }) {
   return (
     <a
@@ -27,13 +29,15 @@ export default function SocialLink(props: {
       />
       <Image
         aria-hidden
-        className="!dark:hidden"
+        className="hidden dark:block"
         src={props.iconSrcForDarkMode}
         alt={props.alt ?? ""}
         width={16}
         height={16}
       />
-      {props.children}
+      <span className={`${props.sandman ? SANDMAN_TEXT_CLASS : ""}`}>
+        {props.name}
+      </span>
     </a>
   );
 }
