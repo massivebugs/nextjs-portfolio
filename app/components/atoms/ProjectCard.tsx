@@ -4,7 +4,8 @@ export type Project = {
   name: string;
   organization: string;
   description: string;
-  techStack: string;
+  skills: string[];
+  lore?: string;
 };
 
 export default function ProjectCard(props: {
@@ -24,12 +25,26 @@ export default function ProjectCard(props: {
       <p className={`italic mb-3 ${props.sandman ? SANDMAN_TEXT_CLASS : ""}`}>
         {props.project.organization}
       </p>
-      <p className={`${props.sandman ? SANDMAN_TEXT_CLASS : ""}`}>
+      <p className={`mb-3 ${props.sandman ? SANDMAN_TEXT_CLASS : ""}`}>
         {props.project.description}
       </p>
-      <p className={`${props.sandman ? SANDMAN_TEXT_CLASS : ""}`}>
-        {props.project.techStack}
+      <p
+        className={`font-bold text-sm ${
+          props.sandman ? SANDMAN_TEXT_CLASS : ""
+        }`}
+      >
+        Technologies used:
       </p>
+      <ul className="list-disc pl-5 text-sm mb-3">
+        <li className={`${props.sandman ? SANDMAN_TEXT_CLASS : ""}`}>
+          {props.project.skills.join(", ")}
+        </li>
+      </ul>
+      {props.project.lore && (
+        <p className={`mb-3 ${props.sandman ? SANDMAN_TEXT_CLASS : ""}`}>
+          {props.project.lore}
+        </p>
+      )}
     </div>
   );
 }

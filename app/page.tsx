@@ -80,28 +80,37 @@ export default function Home() {
       organization: "LEAN BODY Inc.",
       description:
         "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel quia odit dicta veniam commodi qui quibusdam, placeat temporibus fuga incidunt quaerat rem facilis hic, mollitia earum ex facere veritatis error!",
-      techStack: "",
+      skills: ["Go", "TypeScript + React.js", "SQL", "Docker", "AWS", "GCP"],
     },
     {
       name: "teradoga.jp",
       organization: "TERADOGA Co., Ltd",
       description:
         "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel quia odit dicta veniam commodi qui quibusdam, placeat temporibus fuga incidunt quaerat rem facilis hic, mollitia earum ex facere veritatis error!",
-      techStack: "",
+      skills: [
+        "PHP + Laravel",
+        "TypeScript + Vue.js",
+        "AWS",
+        "nginx (Cache server)",
+      ],
     },
     {
       name: "Portfolio",
       organization: "Personal Project",
       description:
         "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel quia odit dicta veniam commodi qui quibusdam, placeat temporibus fuga incidunt quaerat rem facilis hic, mollitia earum ex facere veritatis error!",
-      techStack: "",
+      skills: ["TypeScript + Next.js"],
     },
     {
       name: "TELEBYTE",
       organization: "Personal Project",
-      description:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel quia odit dicta veniam commodi qui quibusdam, placeat temporibus fuga incidunt quaerat rem facilis hic, mollitia earum ex facere veritatis error!",
-      techStack: "",
+      description: "Coding is a big passion of mine even outside of work.\n",
+      skills: [
+        "C++",
+        "PlatformIO",
+        "ESP32 + A few other modules",
+        "JavaScript",
+      ],
     },
   ];
 
@@ -179,7 +188,7 @@ export default function Home() {
         </div>
       </HomeSection>
       <HomeSection
-        title="Projects"
+        title="Featured Projects"
         className="p-8 sm:py-20 md:px-[10%] xl:px-[25%]"
         titleClassName="px-8 md:px-[15%] xl:px-[30%]"
         sandman={true}
