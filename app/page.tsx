@@ -1,3 +1,5 @@
+"use client";
+import { useEffect, useRef, useState } from "react";
 import { ASCII_ANIMATION_FRAMES } from "./ascii_animation_frames";
 import AsciiAnimation from "./components/atoms/AsciiAnimation";
 import JobExperience, { Experience } from "./components/atoms/JobExperience";
@@ -5,9 +7,11 @@ import TechnicalSkill, { Skill } from "./components/atoms/TechnicalSkill";
 import SocialLinkList from "./components/molecules/SocialLinkList";
 import ThemeChanger from "./components/molecules/ThemeChanger";
 import HomeSection from "./components/organisms/HomeSection";
-import { SANDMAN_TEXT_CLASS } from "./lib/sandman";
+import { motion } from "motion/react";
 
 export default function Home() {
+  const [playAsciiAnimation] = useState<boolean>(true);
+
   const jobExperiences: Experience[] = [
     {
       organization: "LEAN BODY Inc.",
@@ -70,13 +74,22 @@ export default function Home() {
     },
   ];
 
+  useEffect(() => {
+    // setPlayAsciiAnimation(false);
+    // const sandman = new Sandman(sandmanContainer.current);
+    // sandman.init();
+    // sandman.collect();
+  }, []);
+
   return (
     <div className="max-h-screen overflow-y-auto snap-y snap-mandatory">
       <AsciiAnimation
+        play={playAsciiAnimation}
         frames={ASCII_ANIMATION_FRAMES}
         frameDurationMs={100}
         reverse={true}
-        className={`fixed left-[-110px] md:left-[80px] bottom-0 text-[3px] tracking-[0.3px] md:text-[4px] md:tracking-[0.5px] text-slate-500 dark:text-slate-600 select-none -z-10 max-h-screen overflow-hidden ${SANDMAN_TEXT_CLASS}`}
+        className={`fixed w-screen h-screen max-h-screen overflow-hidden text-[3px] tracking-[2.8px] md:text-[4px] md:tracking-[3.7px] lg:text-[5px] lg:tracking-[4.5px] text-slate-700 dark:text-slate-400 select-none -z-10`}
+        textClassName="pl-[-50px] md:pl-[100px] bottom-0"
       />
       <section className="relative flex flex-col items-center justify-center min-h-screen p-8 snap-start">
         <p className="absolute top-5">
@@ -84,19 +97,13 @@ export default function Home() {
           <ThemeChanger />
         </p>
         <div className="flex flex-col items-center mb-10">
-          <p
-            className={`text-center w-full mb-1 text-lg ${SANDMAN_TEXT_CLASS}`}
-          >
-            Hi, I'm Da-Hyun.
-          </p>
-          <p
-            className={`text-center w-full mb-[2em] text-lg ${SANDMAN_TEXT_CLASS}`}
-          >
+          <p className={`text-center w-full mb-1 text-lg`}>Hi, I'm Da-Hyun.</p>
+          <p className={`text-center w-full mb-[2em] text-lg`}>
             I'm a full-stack developer.
           </p>
           <div className="flex gap-4 items-center flex-col sm:flex-row">
             <a
-              className={`rounded-md border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 ${SANDMAN_TEXT_CLASS}`}
+              className={`rounded-md border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5`}
               href="#"
               target="_blank"
               rel="noopener noreferrer"
@@ -104,40 +111,67 @@ export default function Home() {
               View Resume
             </a>
             <a
-              className={`rounded-md border border-solid border-gray-400 dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-gray-100 dark:hover:bg-slate-950 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 ${SANDMAN_TEXT_CLASS}`}
+              className={`rounded-md border border-solid border-gray-400 dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-gray-100 dark:hover:bg-slate-950 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5`}
               href="#contact-me"
             >
               Contact Me
             </a>
           </div>
         </div>
-        <div className="flex items-center justify-center gap-2 mb-10 w-[80%]">
+        <div className="flex items-center justify-center gap-2 mb-10 w-[80%] md:w-[50%]">
           <div className="flex-1 border-b border-solid border-[var(--foreground)]" />
-          <span className={`${SANDMAN_TEXT_CLASS}`}>
-            Or, reach out to me via
-          </span>
+          <span className={``}>Or, reach out to me via</span>
           <div className="flex-1 border-b border-solid border-[var(--foreground)]" />
         </div>
-        <SocialLinkList sandman={true} />
+        <SocialLinkList />
       </section>
-      <HomeSection title="Experience" sandman={true}>
+      <HomeSection
+        title="Experience"
+        className="p-8 sm:py-20 md:px-[15%] xl:px-[30%]"
+        sandman={true}
+      >
         <div className="flex flex-col gap-7">
           {jobExperiences.map((v) => (
             <JobExperience experience={v} sandman={true} key={v.organization} />
           ))}
         </div>
       </HomeSection>
-      <HomeSection title="Technical Skills" sandman={true}>
+      <HomeSection
+        title="Technical Skills"
+        className="p-8 sm:py-20 md:px-[15%] xl:px-[30%]"
+        sandman={true}
+      >
         <div className="flex flex-col">
           {technicalSkills.map((v) => (
             <TechnicalSkill skill={v} sandman={true} key={v.name} />
           ))}
         </div>
       </HomeSection>
-      <HomeSection title="Projects" sandman={true}>
-        <div>TODO</div>
+      <HomeSection
+        title="Projects"
+        className="p-8 sm:py-20"
+        titleClassName="px-8 md:px-[15%] xl:px-[30%]"
+        sandman={true}
+      >
+        <div className="sticky top-0 flex h-full items-center overflow-hidden">
+          <div className="flex gap-4">
+            {[1, 2, 3, 4, 5].map((v) => (
+              <div
+                className="group relative h-[450px] w-[450px] overflow-hidden bg-neutral-200"
+                key={v}
+              >
+                <h3>#{v} Something comes here</h3>
+              </div>
+            ))}
+          </div>
+        </div>
       </HomeSection>
-      <HomeSection id="contact-me" title="Contact Me" sandman={true}>
+      <HomeSection
+        id="contact-me"
+        title="Contact Me"
+        className="p-8 sm:py-20 md:px-[15%] xl:px-[30%]"
+        sandman={true}
+      >
         <div>TODO</div>
       </HomeSection>
     </div>

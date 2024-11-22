@@ -3,10 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 
 export default function AsciiAnimation(props: {
+  play: boolean;
   frames: string[];
   frameDurationMs: number;
   reverse: boolean;
   className?: string;
+  textClassName?: string;
 }) {
   const [currFrameIdx, setCurrFrameIdx] = useState<number>(0);
   const animationRequest = useRef<number>();
@@ -47,19 +49,42 @@ export default function AsciiAnimation(props: {
   };
 
   useEffect(() => {
-    animationRequest.current = requestAnimationFrame(animate);
+    if (props.play) {
+      animationRequest.current = requestAnimationFrame(animate);
+    } else {
+      cancelAnimationFrame(animationRequest.current as number);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.play]);
+
+  useEffect(() => {
     return () => cancelAnimationFrame(animationRequest.current as number);
   }, []);
 
   return (
     <pre className={`${props.className ?? ""}`}>
-      {
-        props.frames[
-          isReversing.current
-            ? props.frames.length - 1 - currFrameIdx
-            : currFrameIdx
-        ]
-      }
+      {props.frames.map((v, idx) => (
+        <div
+          className={`absolute left-0 ${
+            idx ===
+            (isReversing.current
+              ? props.frames.length - 1 - currFrameIdx
+              : currFrameIdx)
+              ? "visible"
+              : "invisible"
+          } ${props.textClassName ?? ""}`}
+          key={idx}
+        >
+          {v}
+        </div>
+      ))}
+      {/* {
+          props.frames[
+            isReversing.current
+              ? props.frames.length - 1 - currFrameIdx
+              : currFrameIdx
+          ]
+        } */}
     </pre>
   );
 }

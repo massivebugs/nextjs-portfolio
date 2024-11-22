@@ -4,16 +4,20 @@ import { ReactNode } from "react";
 export default function HomeSection(props: {
   title: string;
   id?: string;
+  className?: string;
+  titleClassName?: string;
   sandman?: boolean;
   children: ReactNode;
 }) {
   return (
     <section
       id={props.id}
-      className="relative flex flex-col justify-center min-h-screen p-8 sm:py-20 md:px-[15%] xl:px-[30%] snap-start"
+      className={`relative flex flex-col justify-center min-h-screen snap-start ${
+        props.className ?? ""
+      }`}
     >
       <h2
-        className={`text-[2em] mb-10 ${
+        className={`text-[2em] mb-10 ${props.titleClassName ?? ""} ${
           props.sandman ? SANDMAN_TEXT_CLASS : ""
         }`}
       >
