@@ -180,13 +180,17 @@ export default function Home() {
       </HomeSection>
       <HomeSection
         title="Projects"
-        className="p-8 sm:py-20"
+        className="p-8 sm:py-20 md:px-[10%] xl:px-[25%]"
         titleClassName="px-8 md:px-[15%] xl:px-[30%]"
         sandman={true}
       >
-        <div className="flex flex-col">
+        <div className="flex flex-wrap gap-[1em]">
           {projects.map((v) => (
-            <ProjectCard project={v} key={v.name} />
+            <ProjectCard
+              className="md:w-[calc(50%-1em)] h-[400px]"
+              project={v}
+              key={v.name}
+            />
           ))}
         </div>
       </HomeSection>

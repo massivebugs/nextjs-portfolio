@@ -13,21 +13,23 @@ export default function ProjectCard(props: {
   sandman?: string;
 }) {
   return (
-    <div>
-      <div>
-        <p className={`${props.sandman ? SANDMAN_TEXT_CLASS : ""}`}>
-          {props.project.name}
-        </p>
-        <p className={`${props.sandman ? SANDMAN_TEXT_CLASS : ""}`}>
-          {props.project.organization}
-        </p>
-        <p className={`${props.sandman ? SANDMAN_TEXT_CLASS : ""}`}>
-          {props.project.description}
-        </p>
-        <p className={`${props.sandman ? SANDMAN_TEXT_CLASS : ""}`}>
-          {props.project.techStack}
-        </p>
-      </div>
+    <div className={`flex flex-col ${props.className ?? ""}`}>
+      <p
+        className={`font-bold text-lg ${
+          props.sandman ? SANDMAN_TEXT_CLASS : ""
+        }`}
+      >
+        {props.project.name}
+      </p>
+      <p className={`italic mb-3 ${props.sandman ? SANDMAN_TEXT_CLASS : ""}`}>
+        {props.project.organization}
+      </p>
+      <p className={`${props.sandman ? SANDMAN_TEXT_CLASS : ""}`}>
+        {props.project.description}
+      </p>
+      <p className={`${props.sandman ? SANDMAN_TEXT_CLASS : ""}`}>
+        {props.project.techStack}
+      </p>
     </div>
   );
 }
