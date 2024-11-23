@@ -17,9 +17,9 @@ export default function HomeSection(props: {
       }`}
     >
       <h2
-        className={`text-[2em] mb-10 ${props.titleClassName ?? ""} ${
-          props.sandman ? SANDMAN_TEXT_CLASS : ""
-        }`}
+        className={`text-[2em] text-center mb-10 ${
+          props.titleClassName ?? ""
+        } ${props.sandman ? SANDMAN_TEXT_CLASS : ""}`}
       >
         {props.title}
       </h2>
