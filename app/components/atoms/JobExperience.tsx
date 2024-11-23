@@ -1,4 +1,4 @@
-import { SANDMAN_TEXT_CLASS } from "@/app/lib/sandman";
+import { SANDMAN_CLASS } from "@/app/lib/sandman";
 
 export type Experience = {
   organization: string;
@@ -10,21 +10,18 @@ export type Experience = {
 export default function JobExperience(props: {
   experience: Experience;
   className?: string;
-  sandman?: boolean;
 }) {
   return (
     <div>
-      <p
-        className={`font-bold mb-1 ${props.sandman ? SANDMAN_TEXT_CLASS : ""}`}
-      >
+      <p className={`font-bold mb-1 ${SANDMAN_CLASS}`}>
         {props.experience.organization}
       </p>
-      <p className={`mb-3 italic ${props.sandman ? SANDMAN_TEXT_CLASS : ""}`}>
+      <p className={`mb-3 italic ${SANDMAN_CLASS}`}>
         {props.experience.jobTitle} | {props.experience.jobLengths.join(" | ")}
       </p>
       <ul className="list-disc pl-5">
         {props.experience.descriptions.map((v) => (
-          <li className={`${props.sandman ? SANDMAN_TEXT_CLASS : ""}`} key={v}>
+          <li className={`${SANDMAN_CLASS}`} key={v}>
             {v}
           </li>
         ))}

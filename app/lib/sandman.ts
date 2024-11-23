@@ -1,7 +1,7 @@
 import { animate, cubicBezier } from "motion";
 
 // Add this class to an element containing text for Sandman to use as letter particles
-export const SANDMAN_TEXT_CLASS = "sandman-text";
+export const SANDMAN_CLASS = "sandman-text";
 
 const LETTER_CLASS = "sandman-letter",
   INITIAL_OFFSET_TOP = "sandmanTop",
@@ -451,8 +451,7 @@ export class Sandman {
     // this.container.dataset[INITIAL_OFFSET_LEFT] = containerBounds.left.toString()
     // this.container.dataset[INITIAL_OFFSET_RIGHT] = containerBounds.right.toString()
 
-    const targetElements =
-      this.container.getElementsByClassName(SANDMAN_TEXT_CLASS);
+    const targetElements = this.container.getElementsByClassName(SANDMAN_CLASS);
 
     for (const el of targetElements) {
       const letters = el.textContent?.split("") ?? [];

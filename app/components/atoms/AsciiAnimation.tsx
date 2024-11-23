@@ -3,61 +3,77 @@
 import { useEffect, useRef, useState } from "react";
 
 export default function AsciiAnimation(props: {
-  play: boolean;
   frames: string[];
   frameDurationMs: number;
-  reverse: boolean;
+  reverse?: boolean;
+  loop?: boolean;
   className?: string;
   textClassName?: string;
+  onFrameChange?: (frameIdx: number) => void;
+  onAnimationEnd?: () => void;
 }) {
   const [currFrameIdx, setCurrFrameIdx] = useState<number>(0);
   const animationRequest = useRef<number>();
-  const currFrameStartTime = useRef<number>();
-  const isFrameHandled = useRef<boolean>(false);
+  const currFrameStartMs = useRef<number>();
+  const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const isReversing = useRef<boolean>(false);
+  // setCurrFrameIdx can be called multiple times before it's actual value has been updated.
+  // So, we create a flag which we can use to determine if setCurrFrameIdx has been called,
+  // and prevent it being called multiple times with the same current value.
+  // const isFrameHandled = useRef<boolean>(false);
 
   const animate: FrameRequestCallback = (time) => {
-    if (currFrameStartTime.current === undefined) {
-      currFrameStartTime.current = time;
+    if (currFrameStartMs.current === undefined) {
+      currFrameStartMs.current = time;
     } else {
       // Time passed since current frame began
-      const deltaMs = time - currFrameStartTime.current;
+      const deltaMs = time - currFrameStartMs.current;
 
       // If delta time surpasses current frame's duration, we show the next frame
       if (deltaMs > props.frameDurationMs) {
         // Reset frame info
-        isFrameHandled.current = false;
-        currFrameStartTime.current = time;
+        currFrameStartMs.current = time;
 
         setCurrFrameIdx((idx) => {
-          const nextFrameIdx = idx + 1;
-
-          if (nextFrameIdx === props.frames.length) {
-            if (props.reverse && !isFrameHandled.current) {
-              isReversing.current = !isReversing.current;
-              isFrameHandled.current = true;
-            }
-            return 0;
+          let nextFrameIdx;
+          if (isReversing.current) {
+            nextFrameIdx = idx - 1;
+          } else if (idx === props.frames.length - 1) {
+            nextFrameIdx = 0;
+          } else {
+            nextFrameIdx = idx + 1;
           }
 
+          if (nextFrameIdx === 0 && !props.loop) {
+            setIsPlaying(false);
+            return idx;
+          }
+
+          if (nextFrameIdx === props.frames.length - 1 || nextFrameIdx === 0) {
+            if (props.reverse) {
+              isReversing.current = !isReversing.current;
+            }
+          }
+
+          props.onFrameChange && props.onFrameChange(nextFrameIdx);
           return nextFrameIdx;
         });
       }
     }
 
-    animationRequest.current = requestAnimationFrame(animate);
+    if (isPlaying) {
+      animationRequest.current = requestAnimationFrame(animate);
+    }
   };
 
   useEffect(() => {
-    if (props.play) {
-      animationRequest.current = requestAnimationFrame(animate);
-    } else {
-      cancelAnimationFrame(animationRequest.current as number);
+    if (isPlaying === false) {
+      props.onAnimationEnd && props.onAnimationEnd();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.play]);
+  }, [isPlaying]);
 
   useEffect(() => {
+    animationRequest.current = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animationRequest.current as number);
   }, []);
 
@@ -66,25 +82,13 @@ export default function AsciiAnimation(props: {
       {props.frames.map((v, idx) => (
         <div
           className={`absolute left-0 ${
-            idx ===
-            (isReversing.current
-              ? props.frames.length - 1 - currFrameIdx
-              : currFrameIdx)
-              ? "visible"
-              : "invisible"
+            idx === currFrameIdx ? "visible" : "invisible"
           } ${props.textClassName ?? ""}`}
           key={idx}
         >
           {v}
         </div>
       ))}
-      {/* {
-          props.frames[
-            isReversing.current
-              ? props.frames.length - 1 - currFrameIdx
-              : currFrameIdx
-          ]
-        } */}
     </pre>
   );
 }

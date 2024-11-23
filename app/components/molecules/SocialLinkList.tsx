@@ -1,9 +1,6 @@
 import SocialLink from "../atoms/SocialLink";
 
-export default function SocialLinkList(props: {
-  className?: string;
-  sandman?: boolean;
-}) {
+export default function SocialLinkList(props: { className?: string }) {
   return (
     <div
       className={`flex gap-3 flex-wrap items-center justify-center ${
@@ -17,7 +14,6 @@ export default function SocialLinkList(props: {
         iconSrcForDarkMode="/github-icon-white.svg"
         alt="GitHub icon"
         className="flex-1"
-        sandman={props.sandman}
       ></SocialLink>
       <SocialLink
         name="LinkedIn"
@@ -26,7 +22,6 @@ export default function SocialLinkList(props: {
         iconSrcForDarkMode="/linkedin-icon-white.png"
         alt="LinkedIn icon"
         className="flex-1"
-        sandman={props.sandman}
       />
       <SocialLink
         name="dhkp443@gmail.com"
@@ -35,7 +30,6 @@ export default function SocialLinkList(props: {
         iconSrcForDarkMode="/email-icon-white.svg"
         alt="Email icon"
         className="flex-1"
-        sandman={props.sandman}
       />
     </div>
   );
