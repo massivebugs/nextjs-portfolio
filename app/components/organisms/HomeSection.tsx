@@ -34,4 +34,6 @@ const HomeSection = forwardRef(
   }
 );
 
+HomeSection.displayName = "HomeSection";
+
 export default HomeSection;

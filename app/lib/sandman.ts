@@ -339,7 +339,7 @@ export class Sandman {
     }
 
     const containerBounds = this.container.getBoundingClientRect();
-    const zoneWidth = containerBounds.width * 0.2;
+    // const zoneWidth = containerBounds.width * 0.2;
     const zoneHeight = containerBounds.height * 0.2;
     const zoneLeft = containerBounds.right + 100;
     const zoneRight = containerBounds.right + 200;

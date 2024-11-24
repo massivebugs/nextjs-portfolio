@@ -44,7 +44,7 @@ export default function Home() {
     isContactSectionInView = useInView(contactMeSectionRef, {
       margin: sectionMargin,
     });
-  let sandman = useRef<Sandman>();
+  const sandman = useRef<Sandman>();
 
   const [currentAnimation, setCurrentAnimation] = useState<MeAnimation | null>(
     MeAnimations.idle
@@ -68,7 +68,7 @@ export default function Home() {
     if (frameIdx > 10) {
       const els =
         experienceSectionRef.current?.getElementsByClassName(SANDMAN_CLASS);
-      for (let el of els as HTMLCollectionOf<Element>) {
+      for (const el of els as HTMLCollectionOf<Element>) {
         await sandman.current?.restoreText(el as HTMLElement, 0.01, 0.1, 0);
       }
     }

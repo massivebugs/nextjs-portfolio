@@ -1,9 +1,9 @@
-import { ForwardedRef, forwardRef, ReactNode } from "react";
+import { ForwardedRef, forwardRef } from "react";
 import HomeSection from "./HomeSection";
 import JobExperience, { Experience } from "../atoms/JobExperience";
 
 const HomeExperienceSection = forwardRef(
-  (props: {}, ref: ForwardedRef<HTMLElement>) => {
+  (_, ref: ForwardedRef<HTMLElement>) => {
     const jobExperiences: Experience[] = [
       {
         organization: "LEAN BODY Inc.",
@@ -46,5 +46,7 @@ const HomeExperienceSection = forwardRef(
     );
   }
 );
+
+HomeExperienceSection.displayName = "HomeExperienceSection";
 
 export default HomeExperienceSection;

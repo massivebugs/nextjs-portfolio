@@ -1,9 +1,9 @@
-import { ForwardedRef, forwardRef, ReactNode } from "react";
+import { ForwardedRef, forwardRef } from "react";
 import HomeSection from "./HomeSection";
 import TechnicalSkill, { Skill } from "../atoms/TechnicalSkill";
 
 const HomeTechnicalSkillsSection = forwardRef(
-  (props: {}, ref: ForwardedRef<HTMLElement>) => {
+  (_, ref: ForwardedRef<HTMLElement>) => {
     const technicalSkills: Skill[] = [
       {
         name: "Programming Languages",
@@ -56,5 +56,7 @@ const HomeTechnicalSkillsSection = forwardRef(
     );
   }
 );
+
+HomeTechnicalSkillsSection.displayName = "HomeTechnicalSkillsSection";
 
 export default HomeTechnicalSkillsSection;

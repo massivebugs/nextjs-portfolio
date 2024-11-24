@@ -55,7 +55,9 @@ export default function AsciiAnimation(props: {
             }
           }
 
-          props.onFrameChange && props.onFrameChange(nextFrameIdx);
+          if (props.onFrameChange) {
+            props.onFrameChange(nextFrameIdx);
+          }
           return nextFrameIdx;
         });
       }
@@ -67,8 +69,8 @@ export default function AsciiAnimation(props: {
   };
 
   useEffect(() => {
-    if (isPlaying === false) {
-      props.onAnimationEnd && props.onAnimationEnd();
+    if (isPlaying === false && props.onAnimationEnd) {
+      props.onAnimationEnd();
     }
   }, [isPlaying]);
 
