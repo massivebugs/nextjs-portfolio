@@ -11,6 +11,7 @@ import HomeExperienceSection from "./components/organisms/HomeExperienceSection"
 import HomeTechnicalSkillsSection from "./components/organisms/HomeTechnicalSkillsSection";
 import HomeProjectsSection from "./components/organisms/HomeProjectsSection";
 import HomeContactMeSection from "./components/organisms/HomeContactMeSection";
+import { Sandman, SANDMAN_CLASS } from "./lib/sandman";
 
 const MeAnimations = {
   idle: "idle",
@@ -23,7 +24,7 @@ type MeAnimation = (typeof MeAnimations)[keyof typeof MeAnimations];
 export default function Home() {
   // Section refs and in-view listeners so we can determine when they are being displayed currently
   const topSectionRef = useRef(null),
-    experienceSectionRef = useRef(null),
+    experienceSectionRef = useRef<HTMLElement>(null),
     technicalSkillsSectionRef = useRef(null),
     projectsSectionRef = useRef(null),
     contactMeSectionRef = useRef(null);
@@ -43,6 +44,7 @@ export default function Home() {
     isContactSectionInView = useInView(contactMeSectionRef, {
       margin: sectionMargin,
     });
+  let sandman = useRef<Sandman>();
 
   const [currentAnimation, setCurrentAnimation] = useState<MeAnimation | null>(
     MeAnimations.idle
@@ -62,6 +64,16 @@ export default function Home() {
     setCurrentAnimation(MeAnimations.disappear);
   };
 
+  const onDisappearAnimationFrameChange = async (frameIdx: number) => {
+    if (frameIdx > 10) {
+      const els =
+        experienceSectionRef.current?.getElementsByClassName(SANDMAN_CLASS);
+      for (let el of els as HTMLCollectionOf<Element>) {
+        await sandman.current?.restoreText(el as HTMLElement, 0.01, 0.1, 0);
+      }
+    }
+  };
+
   useEffect(() => {
     if (isContactSectionInView) {
       console.log("isContactSection");
@@ -78,6 +90,11 @@ export default function Home() {
     } else if (isTopSectionInView) {
       console.log("isTopSection");
       setCurrentAnimation(MeAnimations.idle);
+      sandman.current = new Sandman(
+        experienceSectionRef.current as unknown as HTMLElement
+      );
+      sandman.current.init();
+      sandman.current.collect(0);
     }
   }, [
     isTopSectionInView,
@@ -95,7 +112,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="max-h-screen overflow-y-auto snap-y snap-mandatory">
+    <div className="max-h-screen overflow-x-hidden overflow-y-auto snap-y snap-mandatory">
       {currentAnimation === MeAnimations.idle ? (
         <AsciiAnimation
           key={MeAnimations.idle}
@@ -124,7 +141,8 @@ export default function Home() {
         <AsciiAnimation
           key={MeAnimations.disappear}
           frames={ASCII_ANIMATION_FRAMES_DISAPPEAR}
-          frameDurationMs={30}
+          frameDurationMs={100}
+          onFrameChange={onDisappearAnimationFrameChange}
           className={`fixed w-screen h-screen max-h-screen overflow-hidden text-[3px] tracking-[2.8px] md:text-[4px] md:tracking-[3.7px] lg:text-[5px] lg:tracking-[4.5px] text-slate-700 dark:text-slate-400 select-none -z-10`}
           textClassName="pl-[-50px] md:pl-[100px] bottom-0"
         />

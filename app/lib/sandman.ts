@@ -76,6 +76,64 @@ export class Sandman {
     }
   }
 
+  async restore(
+    text: HTMLElement,
+    letterDelay: number = 0,
+    duration: number = 0.3,
+    bounce?: number
+  ): Promise<Sandman> {
+    if (!this.initialized) {
+      return this;
+    }
+
+    return new Promise<Sandman>((resolve) => {
+      const containerBounds = this.container.getBoundingClientRect();
+      const spans = text.getElementsByClassName(LETTER_CLASS);
+      let animFinishCount = 0;
+      let delay = 0;
+
+      for (const s of spans) {
+        const span = s as HTMLElement;
+        span.style.visibility = "";
+
+        animate(
+          span,
+          {
+            x: 0,
+            y: 0,
+            rotate: 0,
+            opacity: 1,
+          },
+          {
+            type: "spring",
+            ease: "easeInOut",
+            duration,
+            bounce,
+            delay,
+          }
+        ).then(() => {
+          span.dataset[CURRENT_TOP] = this.calcNewPosition(
+            span,
+            containerBounds,
+            {
+              y: 0,
+            }
+          ).y.toString();
+
+          span.dataset[TEXT_RESTORED] = "true";
+
+          animFinishCount++;
+
+          if (animFinishCount === spans.length) {
+            resolve(this);
+          }
+        });
+
+        delay += letterDelay;
+      }
+    });
+  }
+
   async restoreText(
     text: HTMLElement,
     letterDelay: number = 0,
@@ -283,11 +341,9 @@ export class Sandman {
     const containerBounds = this.container.getBoundingClientRect();
     const zoneWidth = containerBounds.width * 0.2;
     const zoneHeight = containerBounds.height * 0.2;
-    const zoneLeft =
-      containerBounds.left + containerBounds.width / 2 - zoneWidth / 2;
-    const zoneRight = zoneLeft + zoneWidth;
-    const zoneTop =
-      containerBounds.top + containerBounds.height / 2 - zoneHeight / 2;
+    const zoneLeft = containerBounds.right + 100;
+    const zoneRight = containerBounds.right + 200;
+    const zoneTop = 0;
     const zoneBottom = zoneTop + zoneHeight;
     let animFinishCount = 0;
 
