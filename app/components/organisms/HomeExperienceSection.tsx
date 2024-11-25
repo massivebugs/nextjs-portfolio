@@ -3,7 +3,7 @@ import HomeSection from "./HomeSection";
 import JobExperience, { Experience } from "../atoms/JobExperience";
 
 const HomeExperienceSection = forwardRef(
-  (_, ref: ForwardedRef<HTMLElement>) => {
+  (props: { restoreText: boolean }, ref: ForwardedRef<HTMLElement>) => {
     const jobExperiences: Experience[] = [
       {
         organization: "LEAN BODY Inc.",
@@ -29,7 +29,6 @@ const HomeExperienceSection = forwardRef(
         ],
       },
     ];
-
     return (
       <HomeSection
         ref={ref}
@@ -39,7 +38,11 @@ const HomeExperienceSection = forwardRef(
       >
         <div className="flex flex-col gap-7">
           {jobExperiences.map((v) => (
-            <JobExperience experience={v} key={v.organization} />
+            <JobExperience
+              experience={v}
+              key={v.organization}
+              restoreText={props.restoreText}
+            />
           ))}
         </div>
       </HomeSection>

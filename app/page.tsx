@@ -11,7 +11,6 @@ import HomeExperienceSection from "./components/organisms/HomeExperienceSection"
 import HomeTechnicalSkillsSection from "./components/organisms/HomeTechnicalSkillsSection";
 import HomeProjectsSection from "./components/organisms/HomeProjectsSection";
 import HomeContactMeSection from "./components/organisms/HomeContactMeSection";
-import { Sandman, SANDMAN_CLASS } from "./lib/sandman";
 
 const MeAnimations = {
   idle: "idle",
@@ -44,13 +43,15 @@ export default function Home() {
     isContactSectionInView = useInView(contactMeSectionRef, {
       margin: sectionMargin,
     });
-  const sandman = useRef<Sandman>();
+  // const sandman = useRef<Sandman>();
 
   const [currentAnimation, setCurrentAnimation] = useState<MeAnimation | null>(
     MeAnimations.idle
   );
   const idleAnimationStartFrameIdx = useRef<number>(0);
   const startDisappearAnimationStartFrameIdx = useRef<number>(0);
+  const [experienceSectionTextRestore, setExperienceSectionTextRestore] =
+    useState<boolean>(false);
 
   const onIdleAnimationFrameChange = (frameIdx: number) => {
     startDisappearAnimationStartFrameIdx.current = frameIdx;
@@ -64,14 +65,21 @@ export default function Home() {
     setCurrentAnimation(MeAnimations.disappear);
   };
 
-  const onDisappearAnimationFrameChange = async (frameIdx: number) => {
-    if (frameIdx > 10) {
-      const els =
-        experienceSectionRef.current?.getElementsByClassName(SANDMAN_CLASS);
-      for (const el of els as HTMLCollectionOf<Element>) {
-        await sandman.current?.restoreText(el as HTMLElement, 0.01, 0.1, 0);
-      }
-    }
+  const onDisappearAnimationFrameChange = async () => {
+    // console.log("disappear animation has ended");
+    // setExperienceSectionTextRestore(true);
+    // if (frameIdx > 10) {
+    setExperienceSectionTextRestore(true);
+    // const els =
+    //   experienceSectionRef.current?.getElementsByClassName(SANDMAN_CLASS);
+    // for (const el of els as HTMLCollectionOf<Element>) {
+    // await sandman.current?.restoreText(
+    //   experienceSectionRef.current as HTMLElement,
+    //   0.05
+    // );
+    // }
+    // }
+    // }
   };
 
   useEffect(() => {
@@ -90,11 +98,11 @@ export default function Home() {
     } else if (isTopSectionInView) {
       console.log("isTopSection");
       setCurrentAnimation(MeAnimations.idle);
-      sandman.current = new Sandman(
-        experienceSectionRef.current as unknown as HTMLElement
-      );
-      sandman.current.init();
-      sandman.current.collect(0);
+      // sandman.current = new Sandman(
+      //   experienceSectionRef.current as unknown as HTMLElement
+      // );
+      // sandman.current.init();
+      // sandman.current.collect(0);
     }
   }, [
     isTopSectionInView,
@@ -135,16 +143,16 @@ export default function Home() {
           onFrameChange={onStartDisappearAnimationFrameChange}
           onAnimationEnd={onStartDisappearAnimationEnd}
           className={`fixed w-screen h-screen max-h-screen overflow-hidden text-[3px] tracking-[2.8px] md:text-[4px] md:tracking-[3.7px] lg:text-[5px] lg:tracking-[4.5px] text-slate-700 dark:text-slate-400 select-none -z-10`}
-          textClassName="pl-[-50px] md:pl-[100px] bottom-0"
+          textClassName="md:pl-[100px] bottom-0"
         />
       ) : currentAnimation === MeAnimations.disappear ? (
         <AsciiAnimation
           key={MeAnimations.disappear}
           frames={ASCII_ANIMATION_FRAMES_DISAPPEAR}
-          frameDurationMs={100}
-          onFrameChange={onDisappearAnimationFrameChange}
+          frameDurationMs={30}
+          onAnimationEnd={onDisappearAnimationFrameChange}
           className={`fixed w-screen h-screen max-h-screen overflow-hidden text-[3px] tracking-[2.8px] md:text-[4px] md:tracking-[3.7px] lg:text-[5px] lg:tracking-[4.5px] text-slate-700 dark:text-slate-400 select-none -z-10`}
-          textClassName="pl-[-50px] md:pl-[100px] bottom-0"
+          textClassName="left-[-10px] lg:left-0 md:pl-[90px] bottom-0"
         />
       ) : (
         currentAnimation === MeAnimations.appear && (
@@ -158,7 +166,10 @@ export default function Home() {
         )
       )}
       <HomeTopSection ref={topSectionRef} />
-      <HomeExperienceSection ref={experienceSectionRef} />
+      <HomeExperienceSection
+        ref={experienceSectionRef}
+        restoreText={experienceSectionTextRestore}
+      />
       <HomeTechnicalSkillsSection ref={technicalSkillsSectionRef} />
       <HomeProjectsSection ref={projectsSectionRef} />
       <HomeContactMeSection ref={contactMeSectionRef} />

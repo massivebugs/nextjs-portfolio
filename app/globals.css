@@ -9,6 +9,7 @@
 
 :root.dark {
   --background: #071e22ff;
+  /* --background: white; */
   --foreground: #ebebeb;
 }
 
