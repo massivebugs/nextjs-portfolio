@@ -1,4 +1,3 @@
-import { SANDMAN_CLASS } from "@/app/lib/sandman";
 import SandmanText from "./SandmanText";
 
 export type Experience = {
