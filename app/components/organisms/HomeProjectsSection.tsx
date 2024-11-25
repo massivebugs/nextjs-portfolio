@@ -1,8 +1,31 @@
-import { ForwardedRef, forwardRef } from "react";
+"use client";
+import { useEffect, useRef } from "react";
 import HomeSection from "./HomeSection";
 import ProjectCard, { Project } from "../atoms/ProjectCard";
+import { motion, useInView, useScroll, useTransform } from "motion/react";
 
-const HomeProjectsSection = forwardRef((_, ref: ForwardedRef<HTMLElement>) => {
+export default function HomeProjectsSection(props: {
+  onEnterView?: () => void;
+  onLeaveView?: () => void;
+  className?: string;
+}) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+  });
+
+  const isInView = useInView(ref);
+
+  const x = useTransform(scrollYProgress, [0, 1], ["1%", "-95%"]);
+
+  useEffect(() => {
+    if (isInView && props.onEnterView) {
+      props.onEnterView();
+    } else if (props.onLeaveView) {
+      props.onLeaveView();
+    }
+  }, [isInView]);
+
   const projects: Project[] = [
     {
       name: "LEAN BODY",
@@ -134,23 +157,21 @@ const HomeProjectsSection = forwardRef((_, ref: ForwardedRef<HTMLElement>) => {
     <HomeSection
       ref={ref}
       title="Featured Projects"
-      className="p-8 sm:py-20 md:px-[10%] xl:px-[20%]"
+      className={`p-2 sm:py-20 h-[300vh] ${props.className ?? ""}`}
       titleClassName="md:px-[7%] xl:px-[17%]"
       sandman={true}
     >
-      <div className="flex flex-wrap gap-[2em]">
-        {projects.map((v) => (
-          <ProjectCard
-            className="md:w-[calc(50%-2em)]"
-            project={v}
-            key={v.name}
-          />
-        ))}
+      <div className="sticky top-0 h-screen flex items-center overflow-hidden">
+        <motion.div style={{ x }} className="flex gap-4">
+          {projects.map((v) => (
+            <ProjectCard
+              project={v}
+              key={v.name}
+              className="w-[450px] h-[450px]"
+            />
+          ))}
+        </motion.div>
       </div>
     </HomeSection>
   );
-});
-
-HomeProjectsSection.displayName = "HomeProjectsSection";
-
-export default HomeProjectsSection;
+}

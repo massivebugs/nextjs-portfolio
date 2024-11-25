@@ -17,9 +17,7 @@ const HomeSection = forwardRef(
       <section
         ref={ref}
         id={props.id}
-        className={`relative flex flex-col justify-center min-h-screen snap-start ${
-          props.className ?? ""
-        }`}
+        className={`relative min-h-screen ${props.className ?? ""}`}
       >
         <h2
           className={`text-[2em] text-center mb-10 ${

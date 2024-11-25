@@ -1,15 +1,34 @@
-import { ForwardedRef, forwardRef } from "react";
 import ThemeChanger from "../molecules/ThemeChanger";
 import SocialLinkList from "../molecules/SocialLinkList";
+import { useEffect, useRef } from "react";
+import { useInView } from "motion/react";
 
-const HomeTopSection = forwardRef((_, ref: ForwardedRef<HTMLElement>) => {
+export default function HomeTopSection(props: {
+  onEnterView?: () => void;
+  onLeaveView?: () => void;
+  className?: string;
+}) {
+  const ref = useRef(null);
+
+  const isInView = useInView(ref);
+
+  useEffect(() => {
+    if (isInView && props.onEnterView) {
+      props.onEnterView();
+    } else if (props.onLeaveView) {
+      props.onLeaveView();
+    }
+  }, [isInView]);
+
   return (
     <section
       ref={ref}
-      className="relative flex flex-col items-center justify-center min-h-screen p-8 snap-start"
+      className={`relative flex flex-col items-center justify-center min-h-screen p-8 snap-start ${
+        props.className ?? ""
+      }`}
     >
       <p className="absolute top-5">
-        <span className="font-[600] mr-2">Current theme</span>
+        <span className="font-[600] mr-2">Theme</span>
         <ThemeChanger />
       </p>
       <div className="flex flex-col items-center mb-10">
@@ -41,8 +60,4 @@ const HomeTopSection = forwardRef((_, ref: ForwardedRef<HTMLElement>) => {
       <SocialLinkList />
     </section>
   );
-});
-
-HomeTopSection.displayName = "HomeTopSection";
-
-export default HomeTopSection;
+}

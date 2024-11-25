@@ -40,7 +40,7 @@ export default function JobExperience(props: {
       </p>
       <ul className="list-disc pl-5">
         {props.experience.descriptions.map((v) => (
-          <li key={v}>
+          <li key={v} className="mb-4">
             <SandmanText
               text={v}
               initialPos="right"
