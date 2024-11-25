@@ -13,9 +13,9 @@ const HomeContactMeSection = forwardRef((_, ref: ForwardedRef<HTMLElement>) => {
     >
       <div className="flex flex-col items-center justify-center ">
         <p className="mb-3 text-center">
-          I haven't had the time to start working on the contact form just yet,{" "}
-          <br />
-          so until then please reach me via
+          I haven't had the time to start working on the contact form just yet
+          :( <br />
+          For any inquiries, please reach me via:
         </p>
         <SocialLinkList />
       </div>

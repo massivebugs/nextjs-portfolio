@@ -7,6 +7,7 @@ export default function AsciiAnimation(props: {
   frameDurationMs: number;
   reverse?: boolean;
   loop?: boolean;
+  flip?: boolean;
   className?: string;
   textClassName?: string;
   onFrameChange?: (frameIdx: number) => void;
@@ -80,7 +81,10 @@ export default function AsciiAnimation(props: {
   }, []);
 
   return (
-    <pre className={`${props.className ?? ""}`}>
+    <pre
+      className={`${props.className ?? ""}`}
+      style={{ transform: props.flip ? "rotateY(180deg)" : undefined }}
+    >
       {props.frames.map((v, idx) => (
         <div
           className={`absolute left-0 ${

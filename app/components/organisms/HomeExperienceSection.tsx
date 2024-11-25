@@ -10,7 +10,7 @@ const HomeExperienceSection = forwardRef(
         jobTitle: "Web Engineer",
         jobLengths: ["Nov 2023 - Oct 2024 (Full-time)"],
         descriptions: [
-          "Full-stack engineer for one of Japan’s largest online fitness platforms, developing new UI, APIs and updates for hundreds of thousands of users.",
+          "Full-stack engineer for one of Japan’s largest online fitness platforms, developing Front-end, Backend APIs for hundreds of thousands of users.",
           "Collaborated and brainstormed closely with cross-functional teams (product, design, analytics, support, engineering) to enhance user experience, contributing to 7+ major feature releases in under a year with minimal bugs.",
           "Implemented test code generation, optimized test execution, and managed a major database upgrade, reducing test writing time by 3 minutes per test and cutting integration test time fivefold.",
         ],

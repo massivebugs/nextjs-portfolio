@@ -10,7 +10,7 @@ class Particle {
     this.y = y;
     this.size = 3;
     this.vx = +(Math.random() * 0.8) * 6;
-    this.vy = -Math.random() * 2;
+    this.vy = -(Math.random() * 0.8) * 2;
     this.vFactor = 1.01;
   }
 

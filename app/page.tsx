@@ -14,9 +14,9 @@ import HomeContactMeSection from "./components/organisms/HomeContactMeSection";
 
 const MeAnimations = {
   idle: "idle",
-  startDisappear: "startDisappear",
   disappear: "disappear",
   appear: "appear",
+  smile: "smile",
 } as const;
 type MeAnimation = (typeof MeAnimations)[keyof typeof MeAnimations];
 
@@ -43,43 +43,24 @@ export default function Home() {
     isContactSectionInView = useInView(contactMeSectionRef, {
       margin: sectionMargin,
     });
-  // const sandman = useRef<Sandman>();
 
   const [currentAnimation, setCurrentAnimation] = useState<MeAnimation | null>(
     MeAnimations.idle
   );
-  const idleAnimationStartFrameIdx = useRef<number>(0);
-  const startDisappearAnimationStartFrameIdx = useRef<number>(0);
+  const disappearAnimationStartFrameIdx = useRef<number>(0);
   const [experienceSectionTextRestore, setExperienceSectionTextRestore] =
     useState<boolean>(false);
 
   const onIdleAnimationFrameChange = (frameIdx: number) => {
-    startDisappearAnimationStartFrameIdx.current = frameIdx;
+    disappearAnimationStartFrameIdx.current = frameIdx;
   };
 
-  const onStartDisappearAnimationFrameChange = (frameIdx: number) => {
-    idleAnimationStartFrameIdx.current = frameIdx;
-  };
-
-  const onStartDisappearAnimationEnd = () => {
-    setCurrentAnimation(MeAnimations.disappear);
-  };
-
-  const onDisappearAnimationFrameChange = async () => {
-    // console.log("disappear animation has ended");
-    // setExperienceSectionTextRestore(true);
-    // if (frameIdx > 10) {
+  const onDisappearAnimationEnd = async () => {
     setExperienceSectionTextRestore(true);
-    // const els =
-    //   experienceSectionRef.current?.getElementsByClassName(SANDMAN_CLASS);
-    // for (const el of els as HTMLCollectionOf<Element>) {
-    // await sandman.current?.restoreText(
-    //   experienceSectionRef.current as HTMLElement,
-    //   0.05
-    // );
-    // }
-    // }
-    // }
+  };
+
+  const onAppearAnimationEnd = async () => {
+    setCurrentAnimation(MeAnimations.smile);
   };
 
   useEffect(() => {
@@ -94,15 +75,10 @@ export default function Home() {
       setCurrentAnimation(null);
     } else if (isExperienceSectionInView) {
       console.log("isExperienceSection");
-      setCurrentAnimation(MeAnimations.startDisappear);
+      setCurrentAnimation(MeAnimations.disappear);
     } else if (isTopSectionInView) {
       console.log("isTopSection");
       setCurrentAnimation(MeAnimations.idle);
-      // sandman.current = new Sandman(
-      //   experienceSectionRef.current as unknown as HTMLElement
-      // );
-      // sandman.current.init();
-      // sandman.current.collect(0);
     }
   }, [
     isTopSectionInView,
@@ -112,55 +88,58 @@ export default function Home() {
     isContactSectionInView,
   ]);
 
-  useEffect(() => {
-    // setPlayAsciiAnimation(false);
-    // const sandman = new Sandman(sandmanContainer.current);
-    // sandman.init();
-    // sandman.collect();
-  }, []);
-
   return (
     <div className="max-h-screen overflow-x-hidden overflow-y-auto snap-y snap-mandatory">
       {currentAnimation === MeAnimations.idle ? (
         <AsciiAnimation
           key={MeAnimations.idle}
           frames={ASCII_ANIMATION_FRAMES.slice(0, 30)}
-          frameDurationMs={70}
+          frameDurationMs={80}
           reverse={true}
           loop={true}
           onFrameChange={onIdleAnimationFrameChange}
-          className={`fixed w-screen h-screen max-h-screen overflow-hidden text-[3px] tracking-[2.8px] md:text-[4px] md:tracking-[3.7px] lg:text-[5px] lg:tracking-[4.5px] text-slate-700 dark:text-slate-400 select-none -z-10`}
+          className="fixed w-screen h-screen max-h-screen overflow-hidden text-[3px] tracking-[2.8px] md:text-[4px] md:tracking-[3.7px] lg:text-[5px] lg:tracking-[4.5px] text-slate-700 dark:text-slate-400 select-none -z-10"
           textClassName="pl-[-50px] md:pl-[100px] bottom-0"
-        />
-      ) : currentAnimation === MeAnimations.startDisappear ? (
-        <AsciiAnimation
-          key={MeAnimations.startDisappear}
-          frames={ASCII_ANIMATION_FRAMES.slice(
-            startDisappearAnimationStartFrameIdx.current,
-            ASCII_ANIMATION_FRAMES.length - 5
-          )}
-          frameDurationMs={30}
-          onFrameChange={onStartDisappearAnimationFrameChange}
-          onAnimationEnd={onStartDisappearAnimationEnd}
-          className={`fixed w-screen h-screen max-h-screen overflow-hidden text-[3px] tracking-[2.8px] md:text-[4px] md:tracking-[3.7px] lg:text-[5px] lg:tracking-[4.5px] text-slate-700 dark:text-slate-400 select-none -z-10`}
-          textClassName="md:pl-[100px] bottom-0"
         />
       ) : currentAnimation === MeAnimations.disappear ? (
         <AsciiAnimation
           key={MeAnimations.disappear}
-          frames={ASCII_ANIMATION_FRAMES_DISAPPEAR}
+          frames={ASCII_ANIMATION_FRAMES.slice(
+            disappearAnimationStartFrameIdx.current,
+            ASCII_ANIMATION_FRAMES.length
+          ).concat(ASCII_ANIMATION_FRAMES_DISAPPEAR)}
           frameDurationMs={30}
-          onAnimationEnd={onDisappearAnimationFrameChange}
-          className={`fixed w-screen h-screen max-h-screen overflow-hidden text-[3px] tracking-[2.8px] md:text-[4px] md:tracking-[3.7px] lg:text-[5px] lg:tracking-[4.5px] text-slate-700 dark:text-slate-400 select-none -z-10`}
-          textClassName="left-[-10px] lg:left-0 md:pl-[90px] bottom-0"
+          onAnimationEnd={onDisappearAnimationEnd}
+          className="fixed w-screen h-screen max-h-screen overflow-hidden text-[3px] tracking-[2.8px] md:text-[4px] md:tracking-[3.7px] lg:text-[5px] lg:tracking-[4.5px] text-slate-700 dark:text-slate-400 select-none -z-10"
+          textClassName="md:pl-[100px] bottom-0"
+        />
+      ) : currentAnimation === MeAnimations.appear ? (
+        <AsciiAnimation
+          key={MeAnimations.appear}
+          frames={ASCII_ANIMATION_FRAMES_DISAPPEAR.slice()
+            .reverse()
+            .concat(
+              ASCII_ANIMATION_FRAMES.slice(
+                0,
+                ASCII_ANIMATION_FRAMES.length - 1
+              ).reverse()
+            )}
+          frameDurationMs={60}
+          flip={true}
+          onAnimationEnd={onAppearAnimationEnd}
+          className="fixed w-screen h-screen max-h-screen overflow-hidden text-[3px] tracking-[2.8px] md:text-[4px] md:tracking-[3.7px] lg:text-[5px] lg:tracking-[4.5px] text-slate-700 dark:text-slate-400 select-none -z-10"
+          textClassName="pl-[-50px] md:pl-[100px] bottom-0"
         />
       ) : (
-        currentAnimation === MeAnimations.appear && (
+        currentAnimation === MeAnimations.smile && (
           <AsciiAnimation
-            key={MeAnimations.appear}
-            frames={ASCII_ANIMATION_FRAMES.reverse()}
-            frameDurationMs={100}
-            className={`fixed w-screen h-screen max-h-screen overflow-hidden text-[3px] tracking-[2.8px] md:text-[4px] md:tracking-[3.7px] lg:text-[5px] lg:tracking-[4.5px] text-slate-700 dark:text-slate-400 select-none -z-10`}
+            key={MeAnimations.smile}
+            frames={ASCII_ANIMATION_FRAMES.slice(0, 25)}
+            frameDurationMs={80}
+            reverse={true}
+            loop={true}
+            flip={true}
+            className="fixed w-screen h-screen max-h-screen overflow-hidden text-[3px] tracking-[2.8px] md:text-[4px] md:tracking-[3.7px] lg:text-[5px] lg:tracking-[4.5px] text-slate-700 dark:text-slate-400 select-none -z-10"
             textClassName="pl-[-50px] md:pl-[100px] bottom-0"
           />
         )
