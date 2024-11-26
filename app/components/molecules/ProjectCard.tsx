@@ -56,7 +56,17 @@ export default function ProjectCard(props: {
     }
   };
   return (
-    <>
+    <div className="relative">
+      {showVideo && props.project.vimeoId && (
+        <button
+          onClick={() => setShowVideo(false)}
+          className="md:hidden absolute bottom-full right-0 inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg bg-gradient-to-br from-pink-500 to-orange-400  hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800"
+        >
+          <span className="relative px-2 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md">
+            Close Video
+          </span>
+        </button>
+      )}
       <div
         className={`relative h-[500px] w-[300px] md:w-[700px] md:h-[400px] rounded-3xl overflow-hidden group ${
           props.className ?? ""
@@ -109,14 +119,6 @@ export default function ProjectCard(props: {
               title={props.project.name}
               className="w-full h-full"
             />
-            <button
-              onClick={() => setShowVideo(false)}
-              className="md:hidden fixed bottom-full right-0 inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg bg-gradient-to-br from-pink-500 to-orange-400  hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800"
-            >
-              <span className="relative px-2 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md">
-                Close Video
-              </span>
-            </button>
           </div>
         )}
         <div className="flex flex-col md:flex-row gap-5 md:gap-10 w-full h-full p-5 bg-black/[0.6] transition-colors text-[var(--white)]">
@@ -180,6 +182,6 @@ export default function ProjectCard(props: {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
