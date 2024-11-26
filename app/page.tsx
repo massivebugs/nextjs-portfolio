@@ -10,15 +10,8 @@ import HomeExperienceSection from "./components/organisms/HomeExperienceSection"
 import HomeTechnicalSkillsSection from "./components/organisms/HomeTechnicalSkillsSection";
 import HomeProjectsSection from "./components/organisms/HomeProjectsSection";
 import HomeContactMeSection from "./components/organisms/HomeContactMeSection";
-
-const Sections = {
-  top: "top",
-  experience: "experience",
-  technicalSkills: "technicalSkills",
-  projects: "projects",
-  contactMe: "contactMe",
-} as const;
-type Section = (typeof Sections)[keyof typeof Sections];
+import Link from "next/link";
+import SideNavbar from "./components/molecules/SideNavbar";
 
 const MeAnimations = {
   idle: "idle",
@@ -28,86 +21,64 @@ const MeAnimations = {
 type MeAnimation = (typeof MeAnimations)[keyof typeof MeAnimations];
 
 export default function Home() {
-  const currentSection = useRef<Section | null>(null);
+  const animationFrameIdx = useRef<number>(0);
   const [flipAnimation, setFlipAnimation] = useState<boolean>(false);
-  const [currentAnimation, setCurrentAnimation] = useState<MeAnimation | null>(
-    MeAnimations.idle
-  );
-
-  const disappearAnimationStartFrameIdx = useRef<number>(0);
+  const [animation, setAnimation] = useState<MeAnimation | null>(null);
   const [experienceSectionTextRestore, setExperienceSectionTextRestore] =
+    useState<boolean>(false);
+  const [
+    technicalSkillsSectionTextRestore,
+    setTechnicalSkillsSectionTextRestore,
+  ] = useState<boolean>(false);
+  const [projectsSectionTextRestore, setProjectsSectionTextRestore] =
+    useState<boolean>(false);
+  const [contactMeSectionTextRestore, setContactMeSectionTextRestore] =
     useState<boolean>(false);
 
   const onEnterTopSection = () => {
-    console.debug("Entering section:", Sections.top);
-    currentSection.current = Sections.top;
+    setFlipAnimation(false);
+    switchAnimation(MeAnimations.appear);
   };
 
-  const onEnterExperienceSection = () => {
-    console.debug("Entering section:", Sections.experience);
-    if (
-      currentSection.current === Sections.top ||
-      currentSection.current === Sections.experience
-    ) {
-      setFlipAnimation(false);
-      setCurrentAnimation(MeAnimations.disappear);
-    }
-    currentSection.current = Sections.experience;
+  const onLeaveTopSection = () => {
+    switchAnimation(MeAnimations.disappear);
   };
 
-  const onLeaveExperienceSection = () => {
-    if (
-      currentSection.current === Sections.top ||
-      currentSection.current === Sections.experience
-    ) {
-      console.debug("Leaving section:", Sections.experience);
-      setFlipAnimation(false);
-      setCurrentAnimation(MeAnimations.appear);
-    }
+  const onEnterContactMeSection = () => {
+    setFlipAnimation(true);
+    switchAnimation(MeAnimations.appear);
+    setContactMeSectionTextRestore(true);
   };
 
-  const onEnterTechnicalSkillsSection = () => {
-    console.debug("Entering section:", Sections.technicalSkills);
-    currentSection.current = Sections.technicalSkills;
+  const onLeaveContactMeSection = () => {
+    switchAnimation(MeAnimations.disappear);
   };
 
-  const onEnterProjectsSection = () => {
-    console.debug("Entering section:", Sections.projects);
-    if (currentSection.current === Sections.contactMe) {
-      setFlipAnimation(true);
-      setCurrentAnimation(MeAnimations.disappear);
-    }
-    currentSection.current = Sections.projects;
-  };
-
-  const onLeaveProjectsSection = () => {
-    if (currentSection.current === Sections.projects) {
-      console.debug("Leaving section:", Sections.projects);
-      setFlipAnimation(true);
-      setCurrentAnimation(MeAnimations.appear);
-    }
-  };
-
-  const onContactMeSectionView = () => {
-    console.debug("Entering section:", Sections.contactMe);
-    currentSection.current = Sections.contactMe;
-  };
-
-  const onIdleAnimationFrameChange = (frameIdx: number) => {
-    disappearAnimationStartFrameIdx.current = frameIdx;
-  };
-
-  const onDisappearAnimationEnd = async () => {
-    setExperienceSectionTextRestore(true);
+  const onAnimationFrameChange = (frameIdx: number) => {
+    animationFrameIdx.current = frameIdx;
   };
 
   const onAppearAnimationEnd = async () => {
-    setCurrentAnimation(MeAnimations.idle);
+    setAnimation(MeAnimations.idle);
+  };
+
+  const switchAnimation = (to: MeAnimation) => {
+    if (
+      animation !== MeAnimations.idle &&
+      to !== MeAnimations.idle &&
+      animation !== null
+    ) {
+      animationFrameIdx.current =
+        ASCII_ANIMATION_FRAMES.length +
+        ASCII_ANIMATION_FRAMES_DISAPPEAR.length -
+        animationFrameIdx.current;
+    }
+    setAnimation(to);
   };
 
   return (
     <div>
-      {currentAnimation === MeAnimations.idle ? (
+      {animation === MeAnimations.idle ? (
         <AsciiAnimation
           key={MeAnimations.idle}
           frames={ASCII_ANIMATION_FRAMES.slice(0, 30)}
@@ -115,60 +86,79 @@ export default function Home() {
           reverse={true}
           loop={true}
           flip={flipAnimation}
-          onFrameChange={onIdleAnimationFrameChange}
+          onFrameChange={onAnimationFrameChange}
           className="fixed w-screen h-screen max-h-screen overflow-hidden text-[3px] tracking-[2.8px] md:text-[4px] md:tracking-[3.7px] lg:text-[5px] lg:tracking-[4.5px] text-slate-700 dark:text-slate-400 select-none -z-10"
           textClassName="pl-[-50px] md:pl-[100px] bottom-0"
         />
-      ) : currentAnimation === MeAnimations.disappear ? (
+      ) : animation === MeAnimations.disappear ? (
         <AsciiAnimation
           key={MeAnimations.disappear}
-          frames={ASCII_ANIMATION_FRAMES.slice(
-            disappearAnimationStartFrameIdx.current,
-            ASCII_ANIMATION_FRAMES.length
-          ).concat(ASCII_ANIMATION_FRAMES_DISAPPEAR)}
+          frames={ASCII_ANIMATION_FRAMES.concat(
+            ASCII_ANIMATION_FRAMES_DISAPPEAR
+          )}
+          start={animationFrameIdx.current}
           flip={flipAnimation}
           frameDurationMs={30}
-          onAnimationEnd={onDisappearAnimationEnd}
+          onFrameChange={onAnimationFrameChange}
           className="fixed w-screen h-screen max-h-screen overflow-hidden text-[3px] tracking-[2.8px] md:text-[4px] md:tracking-[3.7px] lg:text-[5px] lg:tracking-[4.5px] text-slate-700 dark:text-slate-400 select-none -z-10"
           textClassName="md:pl-[100px] bottom-0"
         />
       ) : (
-        currentAnimation === MeAnimations.appear && (
+        animation === MeAnimations.appear && (
           <AsciiAnimation
             key={MeAnimations.appear}
-            frames={ASCII_ANIMATION_FRAMES_DISAPPEAR.slice()
-              .reverse()
-              .concat(
-                ASCII_ANIMATION_FRAMES.slice(
-                  0,
-                  ASCII_ANIMATION_FRAMES.length - 1
-                ).reverse()
-              )}
+            frames={ASCII_ANIMATION_FRAMES.concat(
+              ASCII_ANIMATION_FRAMES_DISAPPEAR
+            ).reverse()}
+            start={animationFrameIdx.current}
             frameDurationMs={60}
             flip={flipAnimation}
             onAnimationEnd={onAppearAnimationEnd}
+            onFrameChange={onAnimationFrameChange}
             className="fixed w-screen h-screen max-h-screen overflow-hidden text-[3px] tracking-[2.8px] md:text-[4px] md:tracking-[3.7px] lg:text-[5px] lg:tracking-[4.5px] text-slate-700 dark:text-slate-400 select-none -z-10"
             textClassName="pl-[-50px] md:pl-[100px] bottom-0"
           />
         )
       )}
-      <HomeTopSection onEnterView={onEnterTopSection} className="mb-10" />
+      <SideNavbar
+        links={[
+          { label: "TOP", hash: "#top" },
+          { label: "EXPERIENCE", hash: "experience" },
+          { label: "SKILLS", hash: "technical-skills" },
+          { label: "PROJECTS", hash: "projects" },
+          { label: "CONTACT", hash: "contact-me" },
+        ]}
+      />
+      <HomeTopSection
+        id="home"
+        onEnterView={onEnterTopSection}
+        onLeaveView={onLeaveTopSection}
+        className="mb-10"
+      />
       <HomeExperienceSection
-        onEnterView={onEnterExperienceSection}
-        onLeaveView={onLeaveExperienceSection}
+        id="experience"
         restoreText={experienceSectionTextRestore}
+        onEnterView={() => setExperienceSectionTextRestore(true)}
         className="bg-white/[0.01] mb-10"
       />
       <HomeTechnicalSkillsSection
-        onEnterView={onEnterTechnicalSkillsSection}
+        id="technical-skills"
+        restoreText={technicalSkillsSectionTextRestore}
+        onEnterView={() => setTechnicalSkillsSectionTextRestore(true)}
         className="mb-10"
       />
       <HomeProjectsSection
-        onEnterView={onEnterProjectsSection}
-        onLeaveView={onLeaveProjectsSection}
+        id="projects"
+        restoreText={projectsSectionTextRestore}
+        onEnterView={() => setProjectsSectionTextRestore(true)}
         className="bg-white/[0.01] mb-10"
       />
-      <HomeContactMeSection onEnterView={onContactMeSectionView} />
+      <HomeContactMeSection
+        id="contact-me"
+        onEnterView={onEnterContactMeSection}
+        onLeaveView={onLeaveContactMeSection}
+        restoreText={contactMeSectionTextRestore}
+      />
     </div>
   );
 }

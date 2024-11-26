@@ -1,4 +1,3 @@
-import { SANDMAN_CLASS } from "@/app/lib/sandman";
 import { ForwardedRef, forwardRef, ReactNode } from "react";
 
 const HomeSection = forwardRef(
@@ -8,7 +7,6 @@ const HomeSection = forwardRef(
       id?: string;
       className?: string;
       titleClassName?: string;
-      sandman?: boolean;
       children: ReactNode;
     },
     ref: ForwardedRef<HTMLElement>
@@ -20,9 +18,9 @@ const HomeSection = forwardRef(
         className={`relative min-h-screen ${props.className ?? ""}`}
       >
         <h2
-          className={`text-[2em] text-center mb-10 ${
+          className={`font-bold text-[5em] text-center mb-10 ${
             props.titleClassName ?? ""
-          } ${props.sandman ? SANDMAN_CLASS : ""}`}
+          }`}
         >
           {props.title}
         </h2>

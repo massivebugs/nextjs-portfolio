@@ -1,4 +1,3 @@
-import { SANDMAN_CLASS } from "@/app/lib/sandman";
 import Image from "next/image";
 
 export default function SocialLink(props: {
@@ -34,7 +33,7 @@ export default function SocialLink(props: {
         width={16}
         height={16}
       />
-      <span className={`${SANDMAN_CLASS}`}>{props.name}</span>
+      <span>{props.name}</span>
     </a>
   );
 }

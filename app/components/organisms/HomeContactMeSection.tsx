@@ -1,40 +1,56 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import HomeSection from "./HomeSection";
 import SocialLinkList from "../molecules/SocialLinkList";
-import { useInView } from "motion/react";
+import { useMotionValueEvent, useScroll } from "motion/react";
+import SandmanText from "../atoms/SandmanText";
 
 export default function HomeContactMeSection(props: {
-  onEnterView?: () => void;
-  onLeaveView?: () => void;
+  id: string;
+  restoreText: boolean;
+  onEnterView: () => void;
+  onLeaveView: () => void;
   className?: string;
 }) {
   const ref = useRef(null);
+  const isInView = useRef(false);
 
-  const isInView = useInView(ref);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end end"],
+  });
 
-  useEffect(() => {
-    if (isInView && props.onEnterView) {
+  useMotionValueEvent(scrollYProgress, "change", (value) => {
+    if (value >= 0.5 && !isInView.current) {
+      isInView.current = true;
       props.onEnterView();
-    } else if (props.onLeaveView) {
+    } else if (value < 0.5 && isInView.current) {
+      isInView.current = false;
       props.onLeaveView();
     }
-  }, [isInView]);
+  });
 
   return (
     <HomeSection
       ref={ref}
-      id="contact-me"
+      id={props.id}
       title="Contact Me"
       className={`p-8 sm:py-20 md:px-[15%] xl:px-[30%] flex flex-col justify-center ${
         props.className ?? ""
       }`}
-      sandman={true}
     >
       <div className="flex flex-col items-center justify-center ">
         <p className="mb-5 text-center">
-          I haven't had the time to start working on the contact form just yet
-          :( <br />
-          For any inquiries, please reach me via:
+          <SandmanText
+            text="I haven't had the time to start working on the contact form just yet :("
+            initialPos="left"
+            restore={props.restoreText}
+          />
+          <br />
+          <SandmanText
+            text="For any inquiries, please reach me via:"
+            initialPos="left"
+            restore={props.restoreText}
+          />
         </p>
         <SocialLinkList />
       </div>

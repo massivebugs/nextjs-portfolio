@@ -6,9 +6,9 @@ import JobExperience, { Experience } from "../atoms/JobExperience";
 import { useInView } from "motion/react";
 
 export default function HomeExperienceSection(props: {
+  id: string;
   restoreText: boolean;
-  onEnterView?: () => void;
-  onLeaveView?: () => void;
+  onEnterView: () => void;
   className?: string;
 }) {
   const ref = useRef(null);
@@ -18,9 +18,8 @@ export default function HomeExperienceSection(props: {
   useEffect(() => {
     if (isInView && props.onEnterView) {
       props.onEnterView();
-    } else if (props.onLeaveView) {
-      props.onLeaveView();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isInView]);
 
   const jobExperiences: Experience[] = [
@@ -53,11 +52,14 @@ export default function HomeExperienceSection(props: {
     <HomeSection
       ref={ref}
       title="Experience"
-      className={`p-8 sm:py-20 md:px-[15%] xl:px-[30%] flex flex-col justify-center overflow-hidden ${
+      className={`p-5 h-[150vh] md:px-[15%] xl:px-[30%] flex flex-col justify-center overflow-hidden ${
         props.className ?? ""
       }`}
-      sandman={true}
     >
+      <div
+        id={props.id}
+        className="absolute pointer-events-none top-[25vh] left-1/2 transform -translate-x-1/2"
+      />
       <div className="flex flex-col gap-7">
         {jobExperiences.map((v) => (
           <JobExperience

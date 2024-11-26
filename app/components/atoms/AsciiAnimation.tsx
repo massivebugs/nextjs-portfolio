@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 export default function AsciiAnimation(props: {
   frames: string[];
   frameDurationMs: number;
+  start?: number;
   reverse?: boolean;
   loop?: boolean;
   flip?: boolean;
@@ -13,7 +14,7 @@ export default function AsciiAnimation(props: {
   onFrameChange?: (frameIdx: number) => void;
   onAnimationEnd?: () => void;
 }) {
-  const [currFrameIdx, setCurrFrameIdx] = useState<number>(0);
+  const [currFrameIdx, setCurrFrameIdx] = useState<number>(props.start ?? 0);
   const animationRequest = useRef<number>();
   const currFrameStartMs = useRef<number>();
   const [isPlaying, setIsPlaying] = useState<boolean>(true);

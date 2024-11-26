@@ -19,7 +19,9 @@ export default function ThemeChanger(props: { className?: string }) {
     <select
       value={theme}
       onChange={(e) => setTheme(e.target.value)}
-      className={`rounded-md text-center ${props.className ?? ""}`}
+      className={`rounded-md text-center ${
+        props.className ?? ""
+      } bg-[var(--background)] text-[var(--foreground)]`}
     >
       <option value="system">System</option>
       <option value="dark">Dark</option>

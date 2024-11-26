@@ -1,2 +1,0 @@
-./ascii batch2/* --negative -d 100,135 --only-save --save-txt disa/
-./ascii batch3/* --negative -d 297,209 --only-save --save-txt disa2/
