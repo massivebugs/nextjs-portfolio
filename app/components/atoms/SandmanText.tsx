@@ -19,6 +19,7 @@ export default function SandmanText(props: {
           onTransitionEnd={() => onTransitionEnd(idx)}
           className="whitespace-pre inline-block transition-transform"
           style={{
+            display: props.restore ? undefined : "hidden",
             transitionProperty: "transform, opacity",
             transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
             transform: props.restore
