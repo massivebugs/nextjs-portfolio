@@ -17,7 +17,7 @@ export default function HomeProjectsSection(props: {
 
   const isInView = useInView(ref);
 
-  const x = useTransform(scrollYProgress, [0, 1], ["30%", "-95%"]);
+  const x = useTransform(scrollYProgress, [0.2, 1], ["4%", "-72%"]);
 
   useEffect(() => {
     if (isInView && props.onEnterView) {

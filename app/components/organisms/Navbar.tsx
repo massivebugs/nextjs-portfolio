@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 export default function Navbar() {
   const pathname = usePathname();
   return (
-    <nav className="z-10 absolute top-0 left-2/4 transform -translate-x-1/2 py-1 px-[30px] w-[85%] md:w-[400px] flex gap-2 items-center justify-between bg-[var(--foreground)] text-[var(--background)] rounded-bl-[50px] rounded-br-[50px]">
+    <nav className="z-10 absolute top-0 left-2/4 transform -translate-x-1/2 py-1 px-[15px] w-[85%] md:w-[400px] flex gap-2 items-center justify-between bg-[var(--foreground)] text-[var(--background)] rounded-bl-md rounded-br-md">
       <div className="font-[600] flex gap-2 items-center">
         <Link
           href="/"

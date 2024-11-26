@@ -18,7 +18,7 @@ const HomeSection = forwardRef(
         className={`relative min-h-screen ${props.className ?? ""}`}
       >
         <h2
-          className={`font-bold text-[5em] text-center mb-10 ${
+          className={`font-bold text-[4em] md:text-[5em] text-center mb-10 ${
             props.titleClassName ?? ""
           }`}
         >

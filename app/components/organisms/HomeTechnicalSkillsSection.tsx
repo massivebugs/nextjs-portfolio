@@ -60,7 +60,7 @@ export default function HomeTechnicalSkillsSection(props: {
     <HomeSection
       ref={ref}
       title="Technical Skills"
-      className={`p-5 h-[150vh] md:px-[15%] xl:px-[30%] flex flex-col justify-center ${
+      className={`p-8 h-[150vh] md:px-[15%] xl:px-[30%] flex flex-col justify-center ${
         props.className ?? ""
       }`}
     >
