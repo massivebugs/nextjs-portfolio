@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import HomeSection from "./HomeSection";
 import JobExperience, { Experience } from "../atoms/JobExperience";
-import { useInView } from "motion/react";
+import { useMotionValueEvent, useScroll } from "motion/react";
 
 export default function HomeExperienceSection(props: {
   id: string;
@@ -12,15 +12,19 @@ export default function HomeExperienceSection(props: {
   className?: string;
 }) {
   const ref = useRef(null);
+  const isInView = useRef(false);
 
-  const isInView = useInView(ref);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["-30% start", "end end"],
+  });
 
-  useEffect(() => {
-    if (isInView && props.onEnterView) {
+  useMotionValueEvent(scrollYProgress, "change", (value) => {
+    if (value > 0 && !isInView.current) {
+      isInView.current = true;
       props.onEnterView();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isInView]);
+  });
 
   const jobExperiences: Experience[] = [
     {

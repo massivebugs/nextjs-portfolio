@@ -1,8 +1,13 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import HomeSection from "./HomeSection";
-import ProjectCard, { Project } from "../atoms/ProjectCard";
-import { motion, useInView, useScroll, useTransform } from "motion/react";
+import ProjectCard, { Project } from "../molecules/ProjectCard";
+import {
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  useTransform,
+} from "motion/react";
 
 export default function HomeProjectsSection(props: {
   id: string;
@@ -11,63 +16,70 @@ export default function HomeProjectsSection(props: {
   className?: string;
 }) {
   const ref = useRef(null);
+  const isInView = useRef(false);
   const { scrollYProgress } = useScroll({
     target: ref,
   });
 
-  const isInView = useInView(ref);
-
   const x = useTransform(scrollYProgress, [0.2, 1], ["4%", "-72%"]);
 
-  useEffect(() => {
-    if (isInView && props.onEnterView) {
+  useMotionValueEvent(scrollYProgress, "change", (value) => {
+    if (value > 0 && !isInView.current) {
+      isInView.current = true;
       props.onEnterView();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isInView]);
+  });
 
   const projects: Project[] = [
     {
       name: "LEAN BODY",
       organization: "LEAN BODY Inc.",
-      description: `I worked as a full-stack engineer for an all-in-one online fitness platform,
-in a high-paced environment and quick feature releases.`,
+      description: `I worked as a full-stack engineer for an all-in-one online fitness platform 
+in a fast-paced environment with frequent feature releases. 
+
+My responsibilities included developing APIs in Go, implementing front-end features based on Figma designs, and updating AWS services as needed to support new functionality.`,
       skills: ["Go", "TypeScript + React.js", "SQL", "Docker", "AWS", "GCP"],
       imageSrc: "https://lp.lean-body.jp/img/ogp.png",
+      url: "https://lp.lean-body.jp",
     },
     {
       name: "TERADOGA",
       organization: "TERADOGA Co., Ltd",
-      description: `I designed and led the development of an interactive video maker platform from the ground up,
-while also implementing integration APIs and Webhooks for third-party integration.`,
+      description: `I designed and led the development of an interactive video maker platform from the ground up, including the implementation of integration APIs and webhooks to enable seamless third-party integrations.
+
+This project ultimately led to the company rebranding itself around this product.`,
       skills: [
         "PHP + Laravel",
         "TypeScript + Vue.js",
+        "Tailwind CSS",
         "AWS",
-        "nginx (Cache server)",
+        "nginx (cache server)",
       ],
       imageSrc: "/teradoga.jpeg",
-      url: "teradoga.",
+      url: "https://teradoga.jp",
+      vimeoId: "1033504858",
     },
     {
       name: "Portfolio",
       organization: "Personal Project",
-      description: `I wanted to make a portfolio that would really embody who I am and what I can do.
-I believe I took that quite literally.`,
-      skills: ["TypeScript + Next.js"],
+      description: `I wanted to create a portfolio site that feels personal and reflects who I am, so I designed it to look like me (as ASCII art) filling in the blanks. 
+
+I put it together in just a few days, including the design, as a fun project.`,
+      skills: ["TypeScript + Next.js", "Tailwind CSS"],
+      url: window.location.origin,
     },
     {
       name: "TELEBYTE",
       organization: "Personal Project",
-      description: `My main skills lie in web application development, but I am always looking to expand my knowledge through other domains and to have fun.
-In this project, I made a small virtual presence robot controlled through a WebRTC video chat, capable of doing custom animations/movement.
-This project is still a work in progress, but I've learned a lot so far!`,
-      skills: [
-        "C++",
-        "JavaScript",
-        "PlatformIO",
-        "Microcontroller development board(ESP32-WROOM32) and a few other sensors and modules",
-      ],
+      description: `My main skills are in web application development, but I’m always looking to expand my knowledge and have fun. 
+
+In this project, I built a virtual presence robot controlled via WebRTC video chat, capable of custom animations and movement. 
+
+It’s still a work in progress, but I’ve learned a lot so far!`,
+      skills: ["C++", "JavaScript", "PlatformIO", "ESP32"],
+      imageSrc: "/telebyte.jpg",
+      url: "https://github.com/massivebugs/telebyte-robot",
+      vimeoId: "1033534452",
     },
   ];
 

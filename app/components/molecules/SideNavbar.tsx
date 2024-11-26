@@ -12,7 +12,7 @@ export default function SideNavbar(props: { links: SideNavbarLink[] }) {
         <Link
           key={v.label}
           href={{ pathname: "/", hash: v.hash }}
-          className="relative transition-colors hover:text-[var(--highlight)] hover:after:absolute after:right-[-7px] after:w-1 after:h-1 after:bg-[var(--highlight)]"
+          className="relative font-semibold transition-colors hover:text-[var(--highlight)] hover:after:absolute after:right-[-7px] after:w-1 after:h-1 after:bg-[var(--highlight)]"
         >
           {v.label}
         </Link>

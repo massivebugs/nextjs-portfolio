@@ -1,7 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import HomeSection from "./HomeSection";
 import TechnicalSkill, { Skill } from "../atoms/TechnicalSkill";
-import { useInView } from "motion/react";
+import { useMotionValueEvent, useScroll } from "motion/react";
 
 export default function HomeTechnicalSkillsSection(props: {
   id: string;
@@ -10,15 +10,19 @@ export default function HomeTechnicalSkillsSection(props: {
   className?: string;
 }) {
   const ref = useRef(null);
+  const isInView = useRef(false);
 
-  const isInView = useInView(ref);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["-30% start", "end end"],
+  });
 
-  useEffect(() => {
-    if (isInView && props.onEnterView) {
+  useMotionValueEvent(scrollYProgress, "change", (value) => {
+    if (value > 0.5 && !isInView.current) {
+      isInView.current = true;
       props.onEnterView();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isInView]);
+  });
 
   const technicalSkills: Skill[] = [
     {
