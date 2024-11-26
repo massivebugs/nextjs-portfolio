@@ -4,7 +4,6 @@ import Link from "next/link";
 import SandmanText from "../atoms/SandmanText";
 import VimeoEmbed from "../atoms/VimeoEmbed";
 import { MouseEvent, useRef, useState } from "react";
-import CloseButton from "../atoms/CloseButton";
 
 export type Project = {
   name: string;
@@ -23,10 +22,9 @@ export default function ProjectCard(props: {
   className?: string;
 }) {
   const [showVideo, setShowVideo] = useState<boolean>(false);
-  const origin = window.location.origin;
   const alertTimes = useRef<number>(0);
   const onLinkClick = (event: MouseEvent) => {
-    if (props.project.url === origin) {
+    if (props.project.url === "same") {
       event.preventDefault();
 
       // TODO

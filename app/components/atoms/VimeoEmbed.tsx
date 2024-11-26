@@ -1,3 +1,5 @@
+import Script from "next/script";
+
 export default function VimeoEmbed(props: {
   videoId: string;
   title: string;
@@ -23,7 +25,7 @@ export default function VimeoEmbed(props: {
           title={props.title}
         />
       </div>
-      <script src="https://player.vimeo.com/api/player.js"></script>
+      <Script src="https://player.vimeo.com/api/player.js"></Script>
     </>
   );
 }
