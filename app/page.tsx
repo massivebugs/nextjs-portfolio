@@ -10,7 +10,6 @@ import HomeExperienceSection from "./components/organisms/HomeExperienceSection"
 import HomeTechnicalSkillsSection from "./components/organisms/HomeTechnicalSkillsSection";
 import HomeProjectsSection from "./components/organisms/HomeProjectsSection";
 import HomeContactMeSection from "./components/organisms/HomeContactMeSection";
-import Link from "next/link";
 import SideNavbar from "./components/molecules/SideNavbar";
 
 const MeAnimations = {

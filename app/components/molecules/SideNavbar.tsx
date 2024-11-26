@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 export type SideNavbarLink = {
   label: string;
@@ -7,8 +6,6 @@ export type SideNavbarLink = {
 };
 
 export default function SideNavbar(props: { links: SideNavbarLink[] }) {
-  const pathname = usePathname();
-
   return (
     <div className="fixed z-10 top-0 right-0 h-screen hidden md:flex w-[150px] lg:w-[300px] pr-[50px] lg:pr-[100px] flex-col items-end justify-center">
       {props.links.map((v) => (

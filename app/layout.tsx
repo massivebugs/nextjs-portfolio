@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <body className={`${assistant.className} antialiased`}>
-        <ThemeProvider attribute="class">
+        <ThemeProvider attribute="class" defaultTheme="dark">
           <Navbar />
           {children}
         </ThemeProvider>
