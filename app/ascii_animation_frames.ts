@@ -1,3 +1,21 @@
+const text = `LEANBODYIncWebEngineer|Nov2023-Oct2024(Full-time)Full-stackengineerforoneofJapan’slargestonlinefitnessplatformsdevelopingFront-endBackendAPIsforhundredsofthousandsofusersCollaboratedandbrainstormedcloselywithcross-functionalteams(productdesignanalyticssupportengineering)toenhanceuserexperiencecontributingto7+majorfeaturereleasesinunderayearwithminimalbugsImplementedtestcodegenerationoptimizedtestexecutionandmanagedamajordatabaseupgradereducingtestwritingtimeby3minutespertestandcuttingintegrationtesttimefivefoldTERADOGACoLtdSoftwareEngineer|Jul2020-Oct2023(Full-time)|Nov2023-Oct2024(Contract)LedthedevelopmentofTERADOGAthecompany’sflagshipproductadjustinggoalstoalignwithanewbusinessmodelthatsecuredlong-termagreementswiththreenewbusinessclientswithinthefirstyearofdevelopmentDevelopedanddeployedoverfivefull-stackLaravelandVuejsapplicationsfromthegroundupforvariousclientseachwithuniquebusinessrequirementsoveraspanof25yearsActedasabridgesoftwareengineereffectivelycollaboratingacrossthreeteamsfromseparatecompaniesinbothEnglishandJapanesetosuccessfullymeetfeaturescheduleanddeploymentrequirementsProgrammingLanguagesGoPHPJavaScriptTypeScriptBack-endFrameworks&ToolsEcho(Go)Laravel(PHP)OpenAPIFront-endFrameworksVuejsReactjsNextjsFlutterBootstrapTailwindCSSCloudPlatformsAmazonWebServices(AWS)GoogleCloudPlatform(GCP)DatabasesMySQLMariaDBContainerizationDockerOtherAttentiontodetailstrongworkethicflexibilityandadaptabilityLEANBODYLEANBODYIncIworkedasafull-stackengineerforanall-in-oneonlinefitnessplatforminafast-pacedenvironmentwithfrequentfeaturereleasesMyresponsibilitiesincludeddevelopingAPIsinGoimplementingfront-endfeaturesbasedonFigmadesignsandupdatingAWSservicesasneededtosupportnewfunctionalityGo|TypeScript+Reactjs|SQL|Docker|AWS|GCPTERADOGATERADOGACoLtdIdesignedandledthedevelopmentofaninteractivevideomakerplatformfromthegroundupincludingtheimplementationofintegrationAPIsandwebhookstoenableseamlessthird-partyintegrationsThisprojectultimatelyledtothecompanyrebrandingitselfaroundthisproductPHP+Laravel|TypeScript+Vuejs|TailwindCSS|AWS|nginx(cacheserver)PortfolioPersonalProjectIwantedtocreateaportfoliositethatfeelspersonalandreflectswhoIamsoIdesignedittolooklikeme(asASCIIart)fillingintheblanksIputittogetherinjustafewdaysincludingthedesignasafunprojectTypeScript+Nextjs|TailwindCSSTELEBYTEPersonalProjectMymainskillsareinwebapplicationdevelopmentbutI’malwayslookingtoexpandmyknowledgeandhavefunInthisprojectIbuiltavirtualpresencerobotcontrolledviaWebRTCvideochatcapableofcustomanimationsandmovementIt’sstillaworkinprogressbutI’velearnedalotsofar!C++|JavaScript|PlatformIO|ESP32Ihaven'thadthetimetostartworkingonthecontactformjustyet:(Foranyinquiriespleasereachmevia:`;
+
+function replaceCharWithText(
+  char: string,
+  input: string,
+  replacementText: string
+): string {
+  const regex = new RegExp(char, "g");
+  let textIndex = 0;
+  const textLength = replacementText.length;
+
+  return input.replace(regex, () => {
+    const char = replacementText[textIndex];
+    textIndex = (textIndex + 1) % textLength;
+    return char;
+  });
+}
+
 export const ASCII_ANIMATION_FRAMES: string[] = [
   `                                                                                          
                                                                                           
@@ -6587,7 +6605,7 @@ export const ASCII_ANIMATION_FRAMES: string[] = [
       :@@%                                                                    *%          
       -@@%                                                                    :@          
       =%@%                                                                     *:         `,
-];
+].map((v) => replaceCharWithText("@", v, text));
 
 export const ASCII_ANIMATION_FRAMES_DISAPPEAR: string[] = [
   `                                                                                                                                                                                                                                                                                                   
@@ -16574,4 +16592,4 @@ export const ASCII_ANIMATION_FRAMES_DISAPPEAR: string[] = [
                                                                                                                                                                                                                                                                                                    
                                                                                                                                                                                                                                                                                                    
                                                                                                                                                                                                                                                                                                    `,
-];
+].map((v) => replaceCharWithText("@", v, text));
