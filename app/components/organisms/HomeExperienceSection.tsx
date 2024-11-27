@@ -56,7 +56,7 @@ export default function HomeExperienceSection(props: {
     <HomeSection
       ref={ref}
       title="Experience"
-      className={`p-8 h-[150vh] md:px-[15%] xl:px-[30%] flex flex-col justify-center overflow-hidden ${
+      className={`p-8 h-[150vh] md:px-[15%] xl:px-[30%] flex flex-col justify-center ${
         props.className ?? ""
       }`}
     >
