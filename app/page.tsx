@@ -100,7 +100,7 @@ export default function Home() {
           frameDurationMs={30}
           onFrameChange={onAnimationFrameChange}
           className="fixed w-screen h-screen max-h-screen overflow-hidden text-[3px] tracking-[2.8px] md:text-[4px] md:tracking-[3.7px] lg:text-[5px] lg:tracking-[4.5px] text-slate-800 md:text-slate-700 dark:text-slate-400 select-none -z-10"
-          textClassName="md:pl-[100px] bottom-0"
+          textClassName="pl-[-50px] md:pl-[100px] bottom-0"
         />
       ) : (
         animation === MeAnimations.appear && (
@@ -132,7 +132,7 @@ export default function Home() {
         id="home"
         onEnterView={onEnterTopSection}
         onLeaveView={onLeaveTopSection}
-        className="mb-10"
+        className="mb-[50vh]"
       />
       <HomeExperienceSection
         id="experience"
