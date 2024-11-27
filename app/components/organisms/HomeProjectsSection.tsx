@@ -34,10 +34,9 @@ export default function HomeProjectsSection(props: {
     {
       name: "LEAN BODY",
       organization: "LEAN BODY Inc.",
-      description: `I worked as a full-stack engineer for an all-in-one online fitness platform 
-in a fast-paced environment with frequent feature releases. 
+      description: `As a full-stack engineer for an all-in-one online fitness platform, I worked in a fast-paced environment with frequent feature releases.
 
-My responsibilities included developing APIs in Go, implementing front-end features based on Figma designs, and updating AWS services as needed to support new functionality.`,
+My responsibilities included developing APIs in Go, implementing front-end features based on Figma designs, and updating AWS services to support new functionality.`,
       skills: ["Go", "TypeScript + React.js", "SQL", "Docker", "AWS", "GCP"],
       imageSrc: "https://lp.lean-body.jp/img/ogp.png",
       url: "https://lp.lean-body.jp",
@@ -45,7 +44,7 @@ My responsibilities included developing APIs in Go, implementing front-end featu
     {
       name: "TERADOGA",
       organization: "TERADOGA Co., Ltd",
-      description: `I designed and led the development of an interactive video maker platform from the ground up, including the implementation of integration APIs and webhooks to enable seamless third-party integrations.
+      description: `I designed and led the development of an interactive video maker platform, integrating APIs and webhooks for seamless third-party connections.
 
 This project ultimately led to the company rebranding itself around this product.`,
       skills: [

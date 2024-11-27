@@ -139,7 +139,7 @@ export default function ProjectCard(props: {
             </p>
           </div>
           <div className="flex-1 flex flex-col justify-between">
-            <div className="mb-3 whimd:tespace-pre-line">
+            <div className="mb-3 whitespace-pre-line">
               <SandmanText
                 text={props.project.description}
                 initialPos="right"
