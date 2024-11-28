@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export default function SandmanText(props: {
+export default function AppearingText(props: {
   text: string;
   initialPos: "left" | "right";
   restore: boolean;

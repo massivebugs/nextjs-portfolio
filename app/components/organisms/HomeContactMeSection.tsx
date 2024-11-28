@@ -2,7 +2,7 @@ import { useRef } from "react";
 import HomeSection from "./HomeSection";
 import SocialLinkList from "../molecules/SocialLinkList";
 import { useMotionValueEvent, useScroll } from "motion/react";
-import SandmanText from "../atoms/SandmanText";
+import AppearingText from "../atoms/AppearingText";
 
 export default function HomeContactMeSection(props: {
   id: string;
@@ -40,13 +40,13 @@ export default function HomeContactMeSection(props: {
     >
       <div className="flex flex-col items-center justify-center ">
         <p className="mb-5 text-center">
-          <SandmanText
+          <AppearingText
             text="I haven't had the time to start working on the contact form just yet."
             initialPos="left"
             restore={props.restoreText}
           />
           <br />
-          <SandmanText
+          <AppearingText
             text="For any inquiries, please reach me via:"
             initialPos="left"
             restore={props.restoreText}

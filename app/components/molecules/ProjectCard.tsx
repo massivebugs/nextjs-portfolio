@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import SandmanText from "../atoms/SandmanText";
+import AppearingText from "../atoms/AppearingText";
 import VimeoEmbed from "../atoms/VimeoEmbed";
 import { MouseEvent, useRef, useState } from "react";
 
@@ -124,14 +124,14 @@ export default function ProjectCard(props: {
         <div className="flex flex-col md:flex-row gap-5 md:gap-10 w-full h-full p-5 bg-black/[0.6] transition-colors text-[var(--white)]">
           <div className="whitespace-nowrap">
             <p className="font-bold text-[3em]">
-              <SandmanText
+              <AppearingText
                 text={props.project.name}
                 initialPos="right"
                 restore={props.restoreText}
               />
             </p>
             <p className="italic">
-              <SandmanText
+              <AppearingText
                 text={props.project.organization}
                 initialPos="right"
                 restore={props.restoreText}
@@ -140,7 +140,7 @@ export default function ProjectCard(props: {
           </div>
           <div className="flex-1 flex flex-col justify-between">
             <div className="mb-3 whitespace-pre-line">
-              <SandmanText
+              <AppearingText
                 text={props.project.description}
                 initialPos="right"
                 restore={props.restoreText}
@@ -148,7 +148,7 @@ export default function ProjectCard(props: {
             </div>
             <div className="absolute flex flex-col gap-2 ml-5 py-3 pr-5 pl-5 rounded-tl-3xl bottom-0 right-0 bg-gradient-to-br from-slate-50 to-slate-300 text-[var(--black)]">
               <div>
-                <SandmanText
+                <AppearingText
                   text={props.project.skills.join(" | ")}
                   initialPos="right"
                   restore={props.restoreText}

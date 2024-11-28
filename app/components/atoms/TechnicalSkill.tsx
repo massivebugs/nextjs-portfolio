@@ -1,4 +1,4 @@
-import SandmanText from "./SandmanText";
+import AppearingText from "./AppearingText";
 
 export type Skill = {
   name: string;
@@ -13,7 +13,7 @@ export default function TechnicalSkill(props: {
   return (
     <div className={`mb-2 ${props.className ?? ""}`}>
       <div className="font-bold">
-        <SandmanText
+        <AppearingText
           text={props.skill.name}
           initialPos="left"
           restore={props.restoreText}
@@ -21,7 +21,7 @@ export default function TechnicalSkill(props: {
       </div>
       <ul className="list-disc pl-5">
         <li>
-          <SandmanText
+          <AppearingText
             text={props.skill.skills.join(", ")}
             initialPos="left"
             restore={props.restoreText}
