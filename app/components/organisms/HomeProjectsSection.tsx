@@ -66,7 +66,6 @@ This project ultimately led to the company rebranding itself around this product
 
 I put it together in just a few days, including the design, as a fun project.`,
       skills: ["TypeScript + Next.js", "Tailwind CSS"],
-      url: "same",
     },
     {
       name: "TELEBYTE",
