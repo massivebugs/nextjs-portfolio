@@ -37,7 +37,7 @@ export default function HomeProjectsSection(props: {
       description: `As a full-stack engineer for an all-in-one online fitness platform, I worked in a fast-paced environment with frequent feature releases.
 
 My responsibilities included developing APIs in Go, implementing front-end features based on Figma designs, and updating AWS services to support new functionality.`,
-      skills: ["Pending organization confirmation"],
+      skills: ["Go", "TypeScript + React.js", "SQL", "Docker", "AWS", "GCP"],
       imageSrc: "https://lp.lean-body.jp/img/ogp.png",
       url: "https://lp.lean-body.jp",
     },
@@ -52,6 +52,7 @@ This project ultimately led to the company rebranding itself around this product
         "TypeScript + Vue.js",
         "Tailwind CSS",
         "AWS",
+        "GCP",
         "nginx (cache server)",
       ],
       imageSrc: "/teradoga.jpeg",
