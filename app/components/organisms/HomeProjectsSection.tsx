@@ -47,7 +47,13 @@ My responsibilities included developing APIs in Go, implementing front-end featu
       description: `I designed and led the development of an interactive video maker platform, integrating APIs and webhooks for seamless third-party connections.
 
 This project ultimately led to the company rebranding itself around this product.`,
-      skills: ["Pending organization confirmation"],
+      skills: [
+        "PHP + Laravel",
+        "TypeScript + Vue.js",
+        "Tailwind CSS",
+        "AWS",
+        "nginx (cache server)",
+      ],
       imageSrc: "/teradoga.jpeg",
       url: "https://teradoga.jp",
       vimeoId: "1033504858",
