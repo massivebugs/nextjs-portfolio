@@ -21,7 +21,7 @@ export default function HomeProjectsSection(props: {
     target: ref,
   });
 
-  const x = useTransform(scrollYProgress, [0.2, 1], ["4%", "-72%"]);
+  const x = useTransform(scrollYProgress, [0.2, 1], ["4%", "-80%"]);
 
   useMotionValueEvent(scrollYProgress, "change", (value) => {
     if (value > 0 && !isInView.current) {
@@ -60,12 +60,12 @@ This project ultimately led to the company rebranding itself around this product
       vimeoId: "1033504858",
     },
     {
-      name: "Portfolio",
-      organization: "Personal Project",
-      description: `I wanted to create a portfolio site that feels personal and reflects who I am, so I designed it to look like me (as ASCII art) filling in the blanks. 
-
-I put it together in just a few days, including the design, as a fun project.`,
-      skills: ["TypeScript + Next.js", "Tailwind CSS"],
+      name: "Unnamed",
+      organization: "TERADOGA Co., Ltd",
+      description: `I worked as a full-stack engineer for a video-lesson platform designed for children with developmental language disorders. 
+      
+My responsibility was to develop a one-on-one video chat application to facilitate communication between instructors and students.`,
+      skills: ["PHP + Laravel", "JavaScript + Vue.js", "WebRTC"],
     },
     {
       name: "TELEBYTE",
@@ -79,6 +79,14 @@ It’s still a work in progress, but I’ve learned a lot so far!`,
       imageSrc: "/telebyte.jpg",
       url: "https://github.com/massivebugs/telebyte-robot",
       vimeoId: "1033534452",
+    },
+    {
+      name: "Portfolio",
+      organization: "Personal Project",
+      description: `I wanted to create a portfolio site that feels personal and reflects who I am, so I designed it to look like me (as ASCII art) filling in the blanks. 
+
+I put it together in just a few days, including the design, as a fun project.`,
+      skills: ["TypeScript + Next.js", "Tailwind CSS"],
     },
   ];
 
