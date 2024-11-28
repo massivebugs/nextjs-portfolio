@@ -31,7 +31,7 @@ export default function HomeTechnicalSkillsSection(props: {
     },
     {
       name: "Back-end Frameworks & Tools",
-      skills: ["Echo(Go)", "Laravel(PHP)", "OpenAPI"],
+      skills: ["Echo(Go)", "Laravel(PHP)", "Swagger"],
     },
     {
       name: "Front-end Frameworks",

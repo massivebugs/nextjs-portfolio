@@ -36,7 +36,7 @@ export default function HomeProjectsSection(props: {
       organization: "LEAN BODY Inc.",
       description: `As a full-stack engineer for an all-in-one online fitness platform, I worked in a fast-paced environment with frequent feature releases.
 
-My responsibilities included developing APIs in Go, implementing front-end features based on Figma designs, and updating AWS services to support new functionality.`,
+My responsibilities included developing APIs in Go, implementing React.js front-end based on Figma designs, and updating AWS services to support new functionality.`,
       skills: ["Go", "TypeScript + React.js", "SQL", "Docker", "AWS", "GCP"],
       imageSrc: "https://lp.lean-body.jp/img/ogp.png",
       url: "https://lp.lean-body.jp",

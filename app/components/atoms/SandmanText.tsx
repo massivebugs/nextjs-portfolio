@@ -26,13 +26,15 @@ export default function SandmanText(props: {
       const delta = time - prevTime;
 
       if (delta > 5) {
-        buffer += props.text[currentTextIdx];
+        buffer +=
+          (props.text[currentTextIdx] ?? "") +
+          (props.text[currentTextIdx + 1] ?? "");
         setCurrentText(buffer);
-        currentTextIdx++;
+        currentTextIdx += 2;
         prevTime = time;
       }
 
-      if (!(currentTextIdx === props.text.length)) {
+      if (!(currentTextIdx >= props.text.length)) {
         requestAnimationFrame(animate);
       }
     };
