@@ -17,7 +17,7 @@ export default function SocialLinkList(props: { className?: string }) {
       ></SocialLink>
       <SocialLink
         name="LinkedIn"
-        href="https://www.linkedin.com/in/massivebugs/"
+        href="https://www.linkedin.com/in/dhkp443/"
         iconSrc="/linkedin-icon.png"
         iconSrcForDarkMode="/linkedin-icon-white.png"
         alt="LinkedIn icon"
