@@ -37,7 +37,7 @@ export default function HomeProjectsSection(props: {
       description: `As a full-stack engineer for an all-in-one online fitness platform, I worked in a fast-paced environment with frequent feature releases.
 
 My responsibilities included developing APIs in Go, implementing front-end features based on Figma designs, and updating AWS services to support new functionality.`,
-      skills: ["Go", "TypeScript + React.js", "SQL", "Docker", "AWS", "GCP"],
+      skills: ["Pending organization confirmation"],
       imageSrc: "https://lp.lean-body.jp/img/ogp.png",
       url: "https://lp.lean-body.jp",
     },
@@ -47,13 +47,7 @@ My responsibilities included developing APIs in Go, implementing front-end featu
       description: `I designed and led the development of an interactive video maker platform, integrating APIs and webhooks for seamless third-party connections.
 
 This project ultimately led to the company rebranding itself around this product.`,
-      skills: [
-        "PHP + Laravel",
-        "TypeScript + Vue.js",
-        "Tailwind CSS",
-        "AWS",
-        "nginx (cache server)",
-      ],
+      skills: ["Pending organization confirmation"],
       imageSrc: "/teradoga.jpeg",
       url: "https://teradoga.jp",
       vimeoId: "1033504858",
