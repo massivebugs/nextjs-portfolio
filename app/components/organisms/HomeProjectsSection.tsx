@@ -16,19 +16,21 @@ export default function HomeProjectsSection(props: {
   className?: string;
 }) {
   const ref = useRef(null);
-  const isInView = useRef(false);
-  const { scrollYProgress } = useScroll({
+  const { scrollYProgress: scrollYProgressForPage } = useScroll({
+    target: ref,
+    offset: ["-30% start", "end end"],
+  });
+  const { scrollYProgress: scrollYProgressForList } = useScroll({
     target: ref,
   });
 
-  const x = useTransform(scrollYProgress, [0.2, 1], ["4%", "-80%"]);
-
-  useMotionValueEvent(scrollYProgress, "change", (value) => {
-    if (value > 0 && !isInView.current) {
-      isInView.current = true;
+  useMotionValueEvent(scrollYProgressForPage, "change", (value) => {
+    if (value > 0) {
       props.onEnterView();
     }
   });
+
+  const x = useTransform(scrollYProgressForList, [0.2, 1], ["4%", "-80%"]);
 
   const projects: Project[] = [
     {

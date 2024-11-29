@@ -10,7 +10,6 @@ export default function HomeTechnicalSkillsSection(props: {
   className?: string;
 }) {
   const ref = useRef(null);
-  const isInView = useRef(false);
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -18,8 +17,7 @@ export default function HomeTechnicalSkillsSection(props: {
   });
 
   useMotionValueEvent(scrollYProgress, "change", (value) => {
-    if (value > 0.5 && !isInView.current) {
-      isInView.current = true;
+    if (value > 0.5) {
       props.onEnterView();
     }
   });

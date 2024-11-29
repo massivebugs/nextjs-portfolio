@@ -12,7 +12,6 @@ export default function HomeExperienceSection(props: {
   className?: string;
 }) {
   const ref = useRef(null);
-  const isInView = useRef(false);
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -20,8 +19,7 @@ export default function HomeExperienceSection(props: {
   });
 
   useMotionValueEvent(scrollYProgress, "change", (value) => {
-    if (value > 0 && !isInView.current) {
-      isInView.current = true;
+    if (value > 0) {
       props.onEnterView();
     }
   });

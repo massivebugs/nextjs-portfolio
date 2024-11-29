@@ -12,6 +12,15 @@ import HomeProjectsSection from "./components/organisms/HomeProjectsSection";
 import HomeContactMeSection from "./components/organisms/HomeContactMeSection";
 import SideNavbar from "./components/molecules/SideNavbar";
 
+const PageSections = {
+  top: "top",
+  experience: "experience",
+  technicalSkills: "technical-skills",
+  projects: "projects",
+  contact: "contact-me",
+};
+type PageSection = (typeof PageSections)[keyof typeof PageSections];
+
 const MeAnimations = {
   idle: "idle",
   disappear: "disappear",
@@ -33,20 +42,39 @@ export default function Home() {
     useState<boolean>(false);
   const [contactMeSectionTextRestore, setContactMeSectionTextRestore] =
     useState<boolean>(false);
+  const [currentPageSection, setCurrentPageSection] =
+    useState<PageSection | null>(null);
 
   const onEnterTopSection = () => {
     setFlipAnimation(false);
     switchAnimation(MeAnimations.appear);
+    setCurrentPageSection(PageSections.top);
   };
 
   const onLeaveTopSection = () => {
     switchAnimation(MeAnimations.disappear);
   };
 
+  const onEnterExperienceSection = () => {
+    setExperienceSectionTextRestore(true);
+    setCurrentPageSection(PageSections.experience);
+  };
+
+  const onEnterTechnicalSkillsSection = () => {
+    setTechnicalSkillsSectionTextRestore(true);
+    setCurrentPageSection(PageSections.technicalSkills);
+  };
+
+  const onEnterProjectsSection = () => {
+    setProjectsSectionTextRestore(true);
+    setCurrentPageSection(PageSections.projects);
+  };
+
   const onEnterContactMeSection = () => {
     setFlipAnimation(true);
     switchAnimation(MeAnimations.appear);
     setContactMeSectionTextRestore(true);
+    setCurrentPageSection(PageSections.contact);
   };
 
   const onLeaveContactMeSection = () => {
@@ -121,12 +149,13 @@ export default function Home() {
       )}
       <SideNavbar
         links={[
-          { label: "TOP", hash: "#top" },
-          { label: "EXPERIENCE", hash: "experience" },
-          { label: "SKILLS", hash: "technical-skills" },
-          { label: "PROJECTS", hash: "projects" },
-          { label: "CONTACT", hash: "contact-me" },
+          { label: "TOP", hash: PageSections.top },
+          { label: "EXPERIENCE", hash: PageSections.experience },
+          { label: "SKILLS", hash: PageSections.technicalSkills },
+          { label: "PROJECTS", hash: PageSections.projects },
+          { label: "CONTACT", hash: PageSections.contact },
         ]}
+        currentHash={currentPageSection}
       />
       <HomeTopSection
         id="home"
@@ -137,19 +166,19 @@ export default function Home() {
       <HomeExperienceSection
         id="experience"
         restoreText={experienceSectionTextRestore}
-        onEnterView={() => setExperienceSectionTextRestore(true)}
+        onEnterView={onEnterExperienceSection}
         className="bg-white/[0.01] mb-10"
       />
       <HomeTechnicalSkillsSection
         id="technical-skills"
         restoreText={technicalSkillsSectionTextRestore}
-        onEnterView={() => setTechnicalSkillsSectionTextRestore(true)}
+        onEnterView={onEnterTechnicalSkillsSection}
         className="mb-10"
       />
       <HomeProjectsSection
         id="projects"
         restoreText={projectsSectionTextRestore}
-        onEnterView={() => setProjectsSectionTextRestore(true)}
+        onEnterView={onEnterProjectsSection}
         className="bg-white/[0.01] mb-10"
       />
       <HomeContactMeSection
