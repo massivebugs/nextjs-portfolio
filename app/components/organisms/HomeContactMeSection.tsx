@@ -34,7 +34,7 @@ export default function HomeContactMeSection(props: {
       ref={ref}
       id={props.id}
       title="Contact Me"
-      className={`p-8 sm:py-20 md:px-[15%] xl:px-[30%] flex flex-col justify-center ${
+      className={`p-8 sm:py-20 md:px-[15%] xl:px-[30%] flex flex-col justify-center text-shadow lg:text-shadow-none shadow-[var(--background)] ${
         props.className ?? ""
       }`}
     >

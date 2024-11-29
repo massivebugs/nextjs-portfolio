@@ -35,10 +35,10 @@ export default function HomeTopSection(props: {
       }`}
     >
       <div className="flex flex-col items-center mb-10">
-        <p className={`text-center w-full mb-1 text-lg font-medium`}>
+        <p className="text-center w-full mb-1 text-lg font-medium text-shadow lg:text-shadow-none shadow-[var(--background)]">
           Hi, I'm Da-Hyun.
         </p>
-        <p className={`text-center w-full mb-[2em] text-lg font-medium`}>
+        <p className="text-center w-full mb-[2em] text-lg font-medium text-shadow lg:text-shadow-none shadow-[var(--background)]">
           I'm a full-stack developer.
         </p>
         <div className="flex gap-4 items-center flex-col sm:flex-row">
@@ -50,7 +50,7 @@ export default function HomeTopSection(props: {
             View Resume
           </a>
           <a
-            className="font-medium rounded-md border border-solid border-gray-400 dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-gray-100 dark:hover:bg-slate-950 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
+            className="font-medium rounded-md border border-solid border-gray-400 dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-gray-100 dark:hover:bg-slate-950 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 text-shadow lg:text-shadow-none shadow-[var(--background)]"
             href="#contact-me"
           >
             Contact Me
@@ -59,7 +59,9 @@ export default function HomeTopSection(props: {
       </div>
       <div className="flex items-center justify-center gap-2 mb-10 w-[80%] md:w-[50%]">
         <div className="flex-1 border-b border-solid border-[var(--foreground)]" />
-        <span className={``}>Or, reach out to me via</span>
+        <span className="text-shadow lg:text-shadow-none shadow-[var(--background)]">
+          Or, reach out to me via
+        </span>
         <div className="flex-1 border-b border-solid border-[var(--foreground)]" />
       </div>
       <SocialLinkList />
