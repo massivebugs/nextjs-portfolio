@@ -46,7 +46,7 @@ My responsibilities included developing APIs in Go, implementing React.js front-
     {
       name: "TERADOGA",
       organization: "TERADOGA Co., Ltd",
-      description: `I designed and led the development of an interactive video maker platform, integrating APIs and webhooks for seamless third-party connections.
+      description: `I designed and led the development of an interactive video maker platform, as well as integrating APIs and webhooks for seamless third-party connections.
 
 This project ultimately led to the company rebranding itself around this product.`,
       skills: [
