@@ -5,12 +5,12 @@ export type SideNavbarLink = {
   hash: string;
 };
 
-export default function SideNavbar(props: {
+export default function HomeSiveNav(props: {
   links: SideNavbarLink[];
   currentHash: string | null;
 }) {
   return (
-    <div className="fixed z-10 top-0 right-0 h-screen hidden md:flex w-[150px] lg:w-[300px] pr-[50px] lg:pr-[100px] flex-col items-end justify-center">
+    <nav className="fixed z-10 top-0 right-0 h-screen hidden md:flex w-[150px] lg:w-[300px] pr-[50px] lg:pr-[100px] flex-col items-end justify-center">
       {props.links.map((v) => (
         <Link
           key={v.label}
@@ -24,6 +24,6 @@ export default function SideNavbar(props: {
           {v.label}
         </Link>
       ))}
-    </div>
+    </nav>
   );
 }

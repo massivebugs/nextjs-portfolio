@@ -5,7 +5,10 @@ import { ThemeProvider } from "next-themes";
 import Navbar from "./components/organisms/Navbar";
 
 export const metadata: Metadata = {
-  title: "Da Hyun Kim - Software Engineer Portfolio",
+  title: {
+    template: "%s - Da Hyun Kim",
+    default: "Da Hyun Kim - Software Engineer Portfolio",
+  },
 };
 
 export default function RootLayout({

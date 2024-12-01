@@ -10,7 +10,7 @@ import HomeExperienceSection from "./components/organisms/HomeExperienceSection"
 import HomeTechnicalSkillsSection from "./components/organisms/HomeTechnicalSkillsSection";
 import HomeProjectsSection from "./components/organisms/HomeProjectsSection";
 import HomeContactMeSection from "./components/organisms/HomeContactMeSection";
-import SideNavbar from "./components/molecules/SideNavbar";
+import SideNavbar from "./components/molecules/HomeSideNav";
 
 const PageSections = {
   top: "top",
