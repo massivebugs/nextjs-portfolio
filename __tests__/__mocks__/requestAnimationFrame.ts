@@ -9,11 +9,8 @@ export function mockRequestAnimationFrame(stepsMs: number = 5) {
       return delta;
     });
 
-  return {
-    mockFunc,
-    cleanup: () => {
-      mockFunc.mockRestore();
-      jest.useRealTimers();
-    },
+  return () => {
+    mockFunc.mockRestore();
+    jest.useRealTimers();
   };
 }

@@ -24,7 +24,6 @@ export default function AppearingText(props: {
 
       const delta = time - prevTime;
 
-      console.log("Delta: ", delta, time, prevTime);
       if (delta >= 5) {
         buffer +=
           (props.text[currentTextIdx] ?? "") +

@@ -19,7 +19,7 @@ test("does not animate when restore is false", () => {
 });
 
 test("renders an empty string at 0 duration", () => {
-  const { mockFunc, cleanup } = mockRequestAnimationFrame(5);
+  const cleanup = mockRequestAnimationFrame(5);
 
   render(
     <p>
@@ -31,7 +31,7 @@ test("renders an empty string at 0 duration", () => {
     </p>
   );
 
-  expect(mockFunc).toHaveBeenCalledTimes(1);
+  expect(requestAnimationFrame).toHaveBeenCalledTimes(1);
 
   const component = screen.getByRole("paragraph");
   expect(component).toHaveTextContent("");
@@ -40,7 +40,7 @@ test("renders an empty string at 0 duration", () => {
 });
 
 test("renders two characters at a time", () => {
-  const { cleanup } = mockRequestAnimationFrame(5);
+  const cleanup = mockRequestAnimationFrame(5);
 
   render(
     <p>
