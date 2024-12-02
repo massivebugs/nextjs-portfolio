@@ -39,7 +39,7 @@ test("renders an empty string at 0 duration", () => {
   cleanup();
 });
 
-test("renders two characters after 5 milliseconds has passed", () => {
+test("renders two characters at a time", () => {
   const { cleanup } = mockRequestAnimationFrame(5);
 
   render(
@@ -53,7 +53,11 @@ test("renders two characters after 5 milliseconds has passed", () => {
   );
 
   act(() => {
-    jest.advanceTimersByTime(10);
+    // At first tick, still renders empty string
+    jest.advanceTimersByTime(5);
+
+    // At second tick, renders 2 characters
+    jest.advanceTimersByTime(5);
   });
 
   expect(requestAnimationFrame).toHaveBeenCalledTimes(3);
