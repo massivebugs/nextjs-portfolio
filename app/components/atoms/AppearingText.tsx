@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function AppearingText(props: {
   text: string;
@@ -8,7 +8,6 @@ export default function AppearingText(props: {
   restore: boolean;
 }) {
   const [currentText, setCurrentText] = useState<string>("");
-  const animationHandler = useRef<number>();
 
   useEffect(() => {
     if (!props.restore) {
@@ -25,7 +24,8 @@ export default function AppearingText(props: {
 
       const delta = time - prevTime;
 
-      if (delta > 5) {
+      console.log("Delta: ", delta, time, prevTime);
+      if (delta >= 5) {
         buffer +=
           (props.text[currentTextIdx] ?? "") +
           (props.text[currentTextIdx + 1] ?? "");
@@ -39,8 +39,8 @@ export default function AppearingText(props: {
       }
     };
 
-    animationHandler.current = requestAnimationFrame(animate);
-  }, [props.restore]);
+    requestAnimationFrame(animate);
+  }, [props.text, props.restore]);
 
   return <>{currentText}</>;
 }

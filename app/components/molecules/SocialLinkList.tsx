@@ -9,6 +9,7 @@ export default function SocialLinkList(props: { className?: string }) {
     >
       <SocialLink
         name="GitHub"
+        label="Click to open my GitHub Profile"
         href="https://github.com/massivebugs/"
         iconSrc="/github-icon.svg"
         iconSrcForDarkMode="/github-icon-white.svg"
@@ -17,6 +18,7 @@ export default function SocialLinkList(props: { className?: string }) {
       ></SocialLink>
       <SocialLink
         name="LinkedIn"
+        label="Click to open my LinkedIn Profile"
         href="https://www.linkedin.com/in/dhkp443/"
         iconSrc="/linkedin-icon.png"
         iconSrcForDarkMode="/linkedin-icon-white.png"
@@ -25,6 +27,7 @@ export default function SocialLinkList(props: { className?: string }) {
       />
       <SocialLink
         name="dhkp443@gmail.com"
+        label="Click to send me a private email"
         href="mailto:dhkp443@gmail.com"
         iconSrc="/email-icon.svg"
         iconSrcForDarkMode="/email-icon-white.svg"
