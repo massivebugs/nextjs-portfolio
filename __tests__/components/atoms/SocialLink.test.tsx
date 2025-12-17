@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
-import SocialLink from "@/app/components/atoms/SocialLink";
+import { render, screen } from "@testing-library/react"
+import SocialLink from "@/components/atoms/SocialLink"
 
 test("links to the correct specified url", () => {
   render(
@@ -11,15 +11,15 @@ test("links to the correct specified url", () => {
       iconSrcForDarkMode="/github-icon.svg/"
       alt="GitHub icon"
     />
-  );
+  )
 
   const link = screen.getByRole("link", {
-    name: /click to open my github profile/i,
-  });
-  expect(link).toBeInTheDocument();
+    name: /click to open my github profile/i
+  })
+  expect(link).toBeInTheDocument()
 
-  expect(link).toHaveAttribute("href", "https://github.com/massivebugs");
-});
+  expect(link).toHaveAttribute("href", "https://github.com/massivebugs")
+})
 
 test("displays both light/dark mode icon images", () => {
   render(
@@ -31,8 +31,8 @@ test("displays both light/dark mode icon images", () => {
       iconSrcForDarkMode="/github-icon.svg/"
       alt="GitHub icon"
     />
-  );
+  )
 
-  const img = screen.getAllByAltText(/github icon/i);
-  expect(img.length).toBe(2);
-});
+  const img = screen.getAllByAltText(/github icon/i)
+  expect(img.length).toBe(2)
+})
